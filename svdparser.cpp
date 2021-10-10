@@ -44,10 +44,10 @@ void SvdParser::nextNode(SvdNode* svdNode, QDomNode& domNode)
             node_ = new SvdNode { list, svdNode };
             auto domNode_ { domNode.firstChild() };
             nextNode(node_, domNode_);
-//            if (svdNode->data_[0] == "peripheral")
-//                qDebug() << svdNode->data_ << node_->child(0);
+            if (svdNode->data_[0] == "peripheral" && svdNode->child(0))
+                svdNode->data_[1] = svdNode->child(0)->data(1);
         } else if (domNode.nodeName() == "#text") {
-            //svdNode->data_[1] = domNode.nodeValue();
+            svdNode->data_[1] = domNode.nodeValue();
             return;
         }
 
