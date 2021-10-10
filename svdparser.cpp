@@ -23,6 +23,9 @@ SvdParser::SvdParser(const QString& fileName, Peripherals& peripherals)
     nextNode(node_, domNode);
 }
 
+
+QRegularExpression re(R"(\s+)");
+
 void SvdParser::nextNode(SvdNode* svdNode, QDomNode& domNode)
 {
     while (!domNode.isNull()) {
@@ -32,33 +35,35 @@ void SvdParser::nextNode(SvdNode* svdNode, QDomNode& domNode)
             QStringList attributes;
             for (int i = 0; i < attributeMap.count(); ++i) {
                 QDomNode attribute = attributeMap.item(i);
-                attributes << attribute.nodeName() + R"(=\")" + attribute.nodeValue() + '"';
+                attributes << attribute.nodeName() + R"( = ")" + attribute.nodeValue() + '"';
             }
             attributes.join(' ');
-            list = { domNode.nodeName(), domNode.nodeValue(), attributes.join(' ') };
+            list = { domNode.nodeName(), domNode.nodeValue().replace(re, " "), attributes.join(' ') };
         }
 
         SvdNode* node_ {};
         if (QDomElement e { domNode.toElement() } /*попытка преобразовать узел в элемент*/; !e.isNull()) { // узел действительно является элементом
+
             node_ = new SvdNode { list, svdNode };
             auto domNode_ { domNode.firstChild() };
             nextNode(node_, domNode_);
-            if (svdNode->data_[0] == "peripheral" && svdNode->child(0)) {
+
+            if (svdNode->data_[0] == "peripheral" && svdNode->childs_.size()) {
                 svdNode->data_[1] = svdNode->child(0)->data(1);
                 peripherals.add(svdNode->data_[1].toString());
-            }
-        } else if (domNode.nodeName() == "#text") {
-            svdNode->data_[1] = domNode.nodeValue();
-            if (peripherals) {
-                /*  */ if (svdNode->data_[0].toString() == "description") {
-                    peripherals.current().description = domNode.nodeValue();
-                } else if (svdNode->data_[0].toString() == "groupName") {
-                    peripherals.current().groupName = domNode.nodeValue();
-                } else if (svdNode->data_[0].toString() == "baseAddress") {
-                    peripherals.current().baseAddress = domNode.nodeValue();
-                } else if (svdNode->data_[0].toString() == "") {
+                for (auto&& var : svdNode->childs_) {
+                    qDebug() << var->data_;
+                    /*  */ if (var->data_[0].toString() == "description") {
+                        peripherals.current().description = var->data_[1].toString();
+                    } else if (var->data_[0].toString() == "groupName") {
+                        peripherals.current().groupName = var->data_[1].toString();
+                    } else if (var->data_[0].toString() == "baseAddress") {
+                        peripherals.current().baseAddress = var->data_[1].toString();
+                    }
                 }
             }
+        } else if (domNode.nodeName() == "#text") {
+            svdNode->data_[1] = domNode.nodeValue().replace(re, " ");
             return;
         }
 
