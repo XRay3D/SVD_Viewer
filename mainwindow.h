@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "peripherals.h"
+
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -19,7 +21,12 @@ public:
 private:
     Ui::MainWindow* ui;
 
+    Peripherals peripherals;
+
     void loadSettings();
     void saveSettings();
+
+    void doubleClicked(const QModelIndex& index);
+    void parse();
 };
 #endif // MAINWINDOW_H

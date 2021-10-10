@@ -1,9 +1,11 @@
 #include "svdparser.h"
+#include "peripherals.h"
 #include <QDebug>
 #include <QFile>
 #include <QtXml/QDomDocument>
 
-SvdParser::SvdParser(const QString& fileName)
+SvdParser::SvdParser(const QString& fileName, Peripherals& peripherals)
+    : peripherals { peripherals }
 {
     QDomDocument doc("mydocument");
     QFile file(fileName);
@@ -35,19 +37,28 @@ void SvdParser::nextNode(SvdNode* svdNode, QDomNode& domNode)
             attributes.join(' ');
             list = { domNode.nodeName(), domNode.nodeValue(), attributes.join(' ') };
         }
-        if (svdNode->parent() && svdNode->parent()->data_[0].toString() == "peripheral") {
-            svdNode->parent()->data_[1] = domNode.nodeValue();
-        }
+
         SvdNode* node_ {};
-        QDomElement e { domNode.toElement() }; // попытка преобразовать узел в элемент
-        if (!e.isNull()) { // узел действительно является элементом
+        if (QDomElement e { domNode.toElement() } /*попытка преобразовать узел в элемент*/; !e.isNull()) { // узел действительно является элементом
             node_ = new SvdNode { list, svdNode };
             auto domNode_ { domNode.firstChild() };
             nextNode(node_, domNode_);
-            if (svdNode->data_[0] == "peripheral" && svdNode->child(0))
+            if (svdNode->data_[0] == "peripheral" && svdNode->child(0)) {
                 svdNode->data_[1] = svdNode->child(0)->data(1);
+                peripherals.add(svdNode->data_[1].toString());
+            }
         } else if (domNode.nodeName() == "#text") {
             svdNode->data_[1] = domNode.nodeValue();
+            if (peripherals) {
+                /*  */ if (svdNode->data_[0].toString() == "description") {
+                    peripherals.current().description = domNode.nodeValue();
+                } else if (svdNode->data_[0].toString() == "groupName") {
+                    peripherals.current().groupName = domNode.nodeValue();
+                } else if (svdNode->data_[0].toString() == "baseAddress") {
+                    peripherals.current().baseAddress = domNode.nodeValue();
+                } else if (svdNode->data_[0].toString() == "") {
+                }
+            }
             return;
         }
 

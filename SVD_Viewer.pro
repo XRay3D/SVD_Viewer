@@ -11,12 +11,14 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    peripherals.cpp \
     svdmodel.cpp \
     svdnode.cpp \
     svdparser.cpp
 
 HEADERS += \
     mainwindow.h \
+    peripherals.h \
     svdmodel.h \
     svdnode.h \
     svdparser.h
