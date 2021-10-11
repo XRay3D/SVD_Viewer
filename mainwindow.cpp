@@ -16,6 +16,10 @@ MainWindow::MainWindow(QWidget* parent)
 
     cppHighlighter = new CppHighlighter(ui->textEdit->document());
     ui->textEdit->setFont({ "JetBrains Mono Light", 10 });
+    const int tabStop = 4; // 4 characters
+
+    QFontMetricsF metrics(ui->textEdit->font());
+    ui->textEdit->setTabStopDistance(tabStop * metrics.averageCharWidth());
 
     connect(ui->pbOpen, &QPushButton::clicked, this, &MainWindow::parse);
     connect(ui->treeView, &QTreeView::doubleClicked, this, &MainWindow::doubleClicked);
