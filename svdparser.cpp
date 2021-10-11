@@ -23,13 +23,12 @@ SvdParser::SvdParser(const QString& fileName, Peripherals& peripherals)
     nextNode(node_, domNode);
 }
 
-
 QRegularExpression re(R"(\s+)");
 
-void SvdParser::nextNode(SvdNode* svdNode, QDomNode& domNode)
+void SvdParser::nextNode(SvdNode* const svdNodeParent, QDomNode& domNode)
 {
     while (!domNode.isNull()) {
-        QList<QVariant> list;
+        QStringList list;
         {
             QDomNamedNodeMap attributeMap = domNode.attributes();
             QStringList attributes;
@@ -38,37 +37,68 @@ void SvdParser::nextNode(SvdNode* svdNode, QDomNode& domNode)
                 attributes << attribute.nodeName() + R"( = ")" + attribute.nodeValue() + '"';
             }
             attributes.join(' ');
-            list = { domNode.nodeName(), domNode.nodeValue().replace(re, " "), attributes.join(' ') };
+            list = QStringList { domNode.nodeName(), domNode.nodeValue().replace(re, " "), attributes.join(' ') };
         }
 
-        SvdNode* node_ {};
+        SvdNode* svdNodeCurrent {};
         if (QDomElement e { domNode.toElement() } /*попытка преобразовать узел в элемент*/; !e.isNull()) { // узел действительно является элементом
-
-            node_ = new SvdNode { list, svdNode };
+            svdNodeCurrent = new SvdNode { list, svdNodeParent };
             auto domNode_ { domNode.firstChild() };
-            nextNode(node_, domNode_);
-
-            if (svdNode->data_[0] == "peripheral" && svdNode->childs_.size()) {
-                svdNode->data_[1] = svdNode->child(0)->data(1);
-                peripherals.add(svdNode->data_[1].toString());
-                for (auto&& var : svdNode->childs_) {
-                    qDebug() << var->data_;
-                    /*  */ if (var->data_[0].toString() == "description") {
-                        peripherals.current().description = var->data_[1].toString();
-                    } else if (var->data_[0].toString() == "groupName") {
-                        peripherals.current().groupName = var->data_[1].toString();
-                    } else if (var->data_[0].toString() == "baseAddress") {
-                        peripherals.current().baseAddress = var->data_[1].toString();
-                    }
-                }
-            }
+            nextNode(svdNodeCurrent, domNode_);
         } else if (domNode.nodeName() == "#text") {
-            svdNode->data_[1] = domNode.nodeValue().replace(re, " ");
+            svdNodeParent->data_[1] = domNode.nodeValue().replace(re, " ");
+            if (svdNodeParent->data_[0] == "name" && svdNodeParent->parent_->parent_)
+                svdNodeParent->parent_->data_[1] = list[1];
             return;
         }
-
-        if (node_)
-            svdNode->appendChild(node_);
+        if (svdNodeCurrent) {
+            svdNodeParent->appendChild(svdNodeCurrent);
+            if (svdNodeParent->childs_.size()) {
+                static SvdNode* var;
+                var = svdNodeParent->childs_.back();
+                auto assign = [](auto& field) { field = var->data_[1].toLocal8Bit(); };
+                if (svdNodeParent->data_[0] == "peripheral") {
+                    auto& pls = peripherals.peripherals;
+                    pls.reserve(1000);
+                    /* */ if (var->data_[0] == "name")
+                        pls.push_back({}), assign(pls.back().name);
+                    else if (var->data_[0] == "description")
+                        assign(pls.back().description);
+                    else if (var->data_[0] == "groupName")
+                        assign(pls.back().groupName);
+                    else if (var->data_[0] == "baseAddress")
+                        assign(pls.back().baseAddress);
+                } else if (svdNodeParent->data_[0] == "register") {
+                    auto& registers = peripherals.current().registers;
+                    registers.reserve(100);
+                    /**/ if (var->data_[0] == "name")
+                        registers.push_back({}), assign(registers.back().name);
+                    else if (var->data_[0] == "displayName")
+                        assign(registers.back().displayName);
+                    else if (var->data_[0] == "description")
+                        assign(registers.back().description);
+                    else if (var->data_[0] == "addressOffset")
+                        assign(registers.back().addressOffset);
+                    else if (var->data_[0] == "size")
+                        assign(registers.back().size);
+                    else if (var->data_[0] == "access")
+                        assign(registers.back().access);
+                    else if (var->data_[0] == "resetValue")
+                        assign(registers.back().resetValue);
+                } else if (svdNodeParent->data_[0] == "field") {
+                    auto& fields = peripherals.current().registers.back().fields;
+                    fields.reserve(32);
+                    /* */ if (var->data_[0] == "name")
+                        fields.push_back({}), assign(fields.back().name);
+                    else if (var->data_[0] == "description")
+                        assign(fields.back().description);
+                    else if (var->data_[0] == "bitOffset")
+                        assign(fields.back().bitOffset);
+                    else if (var->data_[0] == "bitWidth")
+                        assign(fields.back().bitWidth);
+                }
+            }
+        }
         domNode = domNode.nextSibling();
     }
 }

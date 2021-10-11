@@ -7,7 +7,7 @@ class QDomNode;
 
 class SvdParser {
     SvdNode* node_ {};
-    void nextNode(SvdNode* svdNode, QDomNode& domNode);
+    void nextNode(SvdNode * const svdNodeParent, QDomNode& domNode);
     Peripherals& peripherals;
     bool isPeripheral {};
 

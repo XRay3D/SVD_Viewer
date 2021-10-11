@@ -7,11 +7,16 @@ class SvdNode {
     friend class SvdParser;
 
 public:
-    explicit SvdNode(const QList<QVariant>& data, SvdNode* parentItem = nullptr);
+    explicit SvdNode(const QStringList& data, SvdNode* parent = nullptr)
+        : data_(data)
+        , parent_ { parent }
+    {
+    }
+    //explicit SvdNode(const QList<QVariant>& data, SvdNode* parentItem = nullptr);
 
-    ~SvdNode();
+    ~SvdNode() { qDeleteAll(childs_); }
 
-    QVariant data(int column) const { return data_.value(column); }
+    auto data(int column) const { return data_.value(column); }
 
     SvdNode* child(int row) { return childs_.value(row); }
 
@@ -26,7 +31,8 @@ public:
     void appendChild(SvdNode* item) { childs_.append(item); }
 
 private:
-    QList<QVariant> data_;
+    QStringList data_;
+    //QList<QVariant> data_;
     QList<SvdNode*> childs_;
     SvdNode* const parent_;
 };

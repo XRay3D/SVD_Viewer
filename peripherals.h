@@ -4,26 +4,39 @@
 #include <set>
 #include <unordered_map>
 
-class QPlainTextEdit;
+class QTextEdit;
 
-struct Peripheral {
-    QString name;
-    QString description;
-    QString groupName;
-    QString baseAddress;
+struct Field {
+    QByteArray name;
+    QByteArray description;
+    QByteArray bitOffset;
+    QByteArray bitWidth;
 };
 
-class Peripherals {
-    std::vector<Peripheral> data;
-    std::set<QString> set;
-    //    std::/*unordered_*/ map<QString, Peripheral*> peripherals_;
-    QString lastName;
+struct Register {
+    QByteArray name;
+    QByteArray displayName;
+    QByteArray description;
+    QByteArray addressOffset;
+    QByteArray size;
+    QByteArray access;
+    QByteArray resetValue;
+    std::vector<Field> fields;
+};
 
-public:
+struct Peripheral {
+    QByteArray name;
+    QByteArray description;
+    QByteArray groupName;
+    QByteArray baseAddress;
+    std::vector<Register> registers;
+};
+
+struct Peripherals {
+    mutable std::vector<Peripheral> peripherals;
     Peripherals();
-    void add(QString name);
     void clear();
     Peripheral& current();
-    void generate(QPlainTextEdit* plainTextEdit) const;
-    operator bool() const { return data.size(); }
+    void generate(QTextEdit* textEdit) const;
+    operator bool() const { return peripherals.size(); }
 };

@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "cpphighlighter.h"
 #include "svdmodel.h"
 #include "ui_mainwindow.h"
 #include <QClipboard>
@@ -12,6 +13,9 @@ MainWindow::MainWindow(QWidget* parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    cppHighlighter = new CppHighlighter(ui->textEdit->document());
+    ui->textEdit->setFont({ "JetBrains Mono Light", 10 });
 
     connect(ui->pbOpen, &QPushButton::clicked, this, &MainWindow::parse);
     connect(ui->treeView, &QTreeView::doubleClicked, this, &MainWindow::doubleClicked);
@@ -28,7 +32,7 @@ MainWindow::MainWindow(QWidget* parent)
             QString originalText = clipboard->text();
             QString newText;
             for (auto&& index : selectedRows) {
-                newText += index.data().toString().append('\n');
+                newText += QString("QString %1;\n").arg(index.data().toString());
             }
             clipboard->setText(newText);
         }
@@ -90,8 +94,7 @@ void MainWindow::parse()
         ui->treeView->setModel(new SvdModel { SvdParser(ui->lePath->text(), peripherals), ui->treeView });
         ui->treeView->header()->setSectionResizeMode(QHeaderView::Stretch);
         ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-        ui->treeView->expandAll();
-        peripherals.generate(ui->plainTextEdit);
-        ui->plainTextEdit->moveCursor(QTextCursor::Start);
+        peripherals.generate(ui->textEdit);
+        ui->textEdit->moveCursor(QTextCursor::Start);
     }
 }
