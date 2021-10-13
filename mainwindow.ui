@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1225</width>
+    <height>718</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,6 +17,20 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QLineEdit" name="lePath"/>
+    </item>
+    <item row="1" column="1">
+     <widget class="QTextEdit" name="textEdit">
+      <property name="lineWrapMode">
+       <enum>QTextEdit::NoWrap</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="pbOpen">
+      <property name="text">
+       <string>Open</string>
+      </property>
+     </widget>
     </item>
     <item row="1" column="0">
      <widget class="QTreeView" name="treeView">
@@ -37,20 +51,6 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QTextEdit" name="textEdit">
-      <property name="lineWrapMode">
-       <enum>QTextEdit::NoWrap</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="pbOpen">
-      <property name="text">
-       <string>Open</string>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -58,7 +58,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1225</width>
      <height>20</height>
     </rect>
    </property>

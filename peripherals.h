@@ -12,6 +12,11 @@ struct Field {
     QByteArray bitOffset;
     QByteArray bitWidth;
 };
+struct Interrupt {
+    QByteArray name;
+    QByteArray description;
+    QByteArray value;
+};
 
 struct Register {
     QByteArray name;
@@ -25,18 +30,25 @@ struct Register {
 };
 
 struct Peripheral {
+    Peripheral* peripheral {};
     QByteArray name;
     QByteArray description;
     QByteArray groupName;
     QByteArray baseAddress;
     std::vector<Register> registers;
+    std::vector<Interrupt> interrupts;
 };
 
 struct Peripherals {
     mutable std::vector<Peripheral> peripherals;
+    mutable std::map<QString, Peripheral*> peripheralsMap;
+    mutable std::map<QString, std::vector<Peripheral*>> groupMap;
     Peripherals();
     void clear();
     Peripheral& current();
     void generate(QTextEdit* textEdit) const;
     operator bool() const { return peripherals.size(); }
+
+private:
+    void generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit* textEdit) const;
 };

@@ -1,0 +1,401 @@
+<h1 align=center> Reference</h1>
+<p>The  COM object is a QAxObject with the CLSID {CA8A9780-280D-11CF-A24D-444553540000}.</p>
+<h3>Interfaces</h3>
+<ul>
+<li>{3B813CE7-7C10-4F84-AD06-9DF76D97A9AA}
+</ul>
+<h3>Event Interfaces</h3>
+<ul>
+<li>{E790E1D1-9DE8-4853-8AC6-933D4FD9C927}
+</ul>
+<h2>Public Slots:</h2>
+<ul>
+<li>QVariant <a href="#GetVersions"><b>GetVersions</b></a>();</li>
+<li>bool <a href="#LoadFile"><b>LoadFile</b></a>(QString fileName);</li>
+<li>void <a href="#Print"><b>Print</b></a>();</li>
+<li>void <a href="#execCommand"><b>execCommand</b></a>(QVariant strArray);</li>
+<li>void <a href="#goBackwardStack"><b>goBackwardStack</b></a>();</li>
+<li>void <a href="#goForwardStack"><b>goForwardStack</b></a>();</li>
+<li>void <a href="#gotoFirstPage"><b>gotoFirstPage</b></a>();</li>
+<li>void <a href="#gotoLastPage"><b>gotoLastPage</b></a>();</li>
+<li>void <a href="#gotoNextPage"><b>gotoNextPage</b></a>();</li>
+<li>void <a href="#gotoPreviousPage"><b>gotoPreviousPage</b></a>();</li>
+<li>void <a href="#postMessage"><b>postMessage</b></a>(QVariant strArray);</li>
+<li>void <a href="#printAll"><b>printAll</b></a>();</li>
+<li>void <a href="#printAllFit"><b>printAllFit</b></a>(bool shrinkToFit);</li>
+<li>void <a href="#printPages"><b>printPages</b></a>(int from, int to);</li>
+<li>void <a href="#printPagesFit"><b>printPagesFit</b></a>(int from, int to, bool shrinkToFit);</li>
+<li>void <a href="#printWithDialog"><b>printWithDialog</b></a>();</li>
+<li>void <a href="#setCurrentHighlight"><b>setCurrentHighlight</b></a>(int a, int b, int c, int d);</li>
+<li>void <a href="#setCurrentHightlight"><b>setCurrentHightlight</b></a>(int a, int b, int c, int d);</li>
+<li>void <a href="#setCurrentPage"><b>setCurrentPage</b></a>(int n);</li>
+<li>void <a href="#setLayoutMode"><b>setLayoutMode</b></a>(QString layoutMode);</li>
+<li>void <a href="#setMessageHandler"><b>setMessageHandler</b></a>(QVariant messageHandler);</li>
+<li>void <a href="#setNamedDest"><b>setNamedDest</b></a>(QString namedDest);</li>
+<li>void <a href="#setPageMode"><b>setPageMode</b></a>(QString pageMode);</li>
+<li>void <a href="#setShowScrollbars"><b>setShowScrollbars</b></a>(bool On);</li>
+<li>void <a href="#setShowToolbar"><b>setShowToolbar</b></a>(bool On);</li>
+<li>void <a href="#setSrc"><b>setSrc</b></a>(QString src);</li>
+<li>void <a href="#setView"><b>setView</b></a>(QString viewMode);</li>
+<li>void <a href="#setViewRect"><b>setViewRect</b></a>(double left, double top, double width, double height);</li>
+<li>void <a href="#setViewScroll"><b>setViewScroll</b></a>(QString viewMode, double offset);</li>
+<li>void <a href="#setZoom"><b>setZoom</b></a>(double percent);</li>
+<li>void <a href="#setZoomScroll"><b>setZoomScroll</b></a>(double percent, double left, double top);</li>
+</ul>
+<h2>Signals:</h2>
+<ul>
+<li>void <a href="#OnError"><b>OnError</b></a>();</li>
+<li>void <a href="#OnMessage"><b>OnMessage</b></a>();</li>
+<li>void <a href="#exception"><b>exception</b></a>(int code, QString source, QString disc, QString help);</li>
+<li>void <a href="#propertyChanged"><b>propertyChanged</b></a>(QString name);</li>
+<li>void <a href="#signal"><b>signal</b></a>(QString name, int argc, void* argv);</li>
+</ul>
+<h2>Properties:</h2>
+<ul>
+<li>QString <a href="#objectName"><b>objectName</b></a>;</li>
+<li>QString <a href="#control"><b>control</b></a>;</li>
+<li>QVariant <a href="#messageHandler"><b>messageHandler</b></a>;</li>
+<li>QString <a href="#src"><b>src</b></a>;</li>
+</ul>
+<hr><h2>Member Function Documentation</h2>
+<h3><a name=GetVersions></a>QVariant GetVersions ()<tt> [slot]</tt></h3>
+<p>method GetVersions
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(GetVersions()));</pre>
+<p>Or call the function directly:<pre>
+	QVariant result = object->dynamicCall("GetVersions()");</pre>
+
+<h3><a name=LoadFile></a>bool LoadFile (QString fileName)<tt> [slot]</tt></h3>
+<p>method LoadFile
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(LoadFile(QString)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	bool result = object->dynamicCall("LoadFile(QString)", params).toBool();</pre>
+
+<h3><a name=Print></a>void Print ()<tt> [slot]</tt></h3>
+<p>method Print
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(Print()));</pre>
+<p>Or call the function directly:<pre>
+	object->dynamicCall("Print()");</pre>
+
+<h3><a name=execCommand></a>void execCommand (QVariant strArray)<tt> [slot]</tt></h3>
+<p>method execCommand
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QVariant)), object, SLOT(execCommand(QVariant)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("execCommand(QVariant)", params);</pre>
+
+<h3><a name=goBackwardStack></a>void goBackwardStack ()<tt> [slot]</tt></h3>
+<p>method goBackwardStack
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(goBackwardStack()));</pre>
+<p>Or call the function directly:<pre>
+	object->dynamicCall("goBackwardStack()");</pre>
+
+<h3><a name=goForwardStack></a>void goForwardStack ()<tt> [slot]</tt></h3>
+<p>method goForwardStack
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(goForwardStack()));</pre>
+<p>Or call the function directly:<pre>
+	object->dynamicCall("goForwardStack()");</pre>
+
+<h3><a name=gotoFirstPage></a>void gotoFirstPage ()<tt> [slot]</tt></h3>
+<p>method gotoFirstPage
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(gotoFirstPage()));</pre>
+<p>Or call the function directly:<pre>
+	object->dynamicCall("gotoFirstPage()");</pre>
+
+<h3><a name=gotoLastPage></a>void gotoLastPage ()<tt> [slot]</tt></h3>
+<p>method gotoLastPage
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(gotoLastPage()));</pre>
+<p>Or call the function directly:<pre>
+	object->dynamicCall("gotoLastPage()");</pre>
+
+<h3><a name=gotoNextPage></a>void gotoNextPage ()<tt> [slot]</tt></h3>
+<p>method gotoNextPage
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(gotoNextPage()));</pre>
+<p>Or call the function directly:<pre>
+	object->dynamicCall("gotoNextPage()");</pre>
+
+<h3><a name=gotoPreviousPage></a>void gotoPreviousPage ()<tt> [slot]</tt></h3>
+<p>method gotoPreviousPage
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(gotoPreviousPage()));</pre>
+<p>Or call the function directly:<pre>
+	object->dynamicCall("gotoPreviousPage()");</pre>
+
+<h3><a name=postMessage></a>void postMessage (QVariant strArray)<tt> [slot]</tt></h3>
+<p>method postMesage
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QVariant)), object, SLOT(postMessage(QVariant)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("postMessage(QVariant)", params);</pre>
+
+<h3><a name=printAll></a>void printAll ()<tt> [slot]</tt></h3>
+<p>method printAll
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(printAll()));</pre>
+<p>Or call the function directly:<pre>
+	object->dynamicCall("printAll()");</pre>
+
+<h3><a name=printAllFit></a>void printAllFit (bool shrinkToFit)<tt> [slot]</tt></h3>
+<p>method printAllFit
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(bool)), object, SLOT(printAllFit(bool)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("printAllFit(bool)", params);</pre>
+
+<h3><a name=printPages></a>void printPages (int from, int to)<tt> [slot]</tt></h3>
+<p>method printPages
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(int, int)), object, SLOT(printPages(int, int)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("printPages(int, int)", params);</pre>
+
+<h3><a name=printPagesFit></a>void printPagesFit (int from, int to, bool shrinkToFit)<tt> [slot]</tt></h3>
+<p>method printPagesFit
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(int, int, bool)), object, SLOT(printPagesFit(int, int, bool)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("printPagesFit(int, int, bool)", params);</pre>
+
+<h3><a name=printWithDialog></a>void printWithDialog ()<tt> [slot]</tt></h3>
+<p>method printWithDialog
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal()), object, SLOT(printWithDialog()));</pre>
+<p>Or call the function directly:<pre>
+	object->dynamicCall("printWithDialog()");</pre>
+
+<h3><a name=setCurrentHighlight></a>void setCurrentHighlight (int a, int b, int c, int d)<tt> [slot]</tt></h3>
+<p>method setCurrentHighlight
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(int, int, int, int)), object, SLOT(setCurrentHighlight(int, int, int, int)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setCurrentHighlight(int, int, int, int)", params);</pre>
+
+<h3><a name=setCurrentHightlight></a>void setCurrentHightlight (int a, int b, int c, int d)<tt> [slot]</tt></h3>
+<p>method setCurrentHightlight
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(int, int, int, int)), object, SLOT(setCurrentHightlight(int, int, int, int)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setCurrentHightlight(int, int, int, int)", params);</pre>
+
+<h3><a name=setCurrentPage></a>void setCurrentPage (int n)<tt> [slot]</tt></h3>
+<p>method setCurrentPage
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(int)), object, SLOT(setCurrentPage(int)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setCurrentPage(int)", params);</pre>
+
+<h3><a name=setLayoutMode></a>void setLayoutMode (QString layoutMode)<tt> [slot]</tt></h3>
+<p>method setLayoutMode
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(setLayoutMode(QString)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setLayoutMode(QString)", params);</pre>
+
+<h3><a name=setMessageHandler></a>void setMessageHandler (QVariant messageHandler)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QVariant)), object, SLOT(setMessageHandler(QVariant)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setMessageHandler(QVariant)", params);</pre>
+
+<h3><a name=setNamedDest></a>void setNamedDest (QString namedDest)<tt> [slot]</tt></h3>
+<p>method setNamedDest
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(setNamedDest(QString)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setNamedDest(QString)", params);</pre>
+
+<h3><a name=setPageMode></a>void setPageMode (QString pageMode)<tt> [slot]</tt></h3>
+<p>method setPageMode
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(setPageMode(QString)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setPageMode(QString)", params);</pre>
+
+<h3><a name=setShowScrollbars></a>void setShowScrollbars (bool On)<tt> [slot]</tt></h3>
+<p>method setShowScrollbars
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(bool)), object, SLOT(setShowScrollbars(bool)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setShowScrollbars(bool)", params);</pre>
+
+<h3><a name=setShowToolbar></a>void setShowToolbar (bool On)<tt> [slot]</tt></h3>
+<p>method setShowToolbar
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(bool)), object, SLOT(setShowToolbar(bool)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setShowToolbar(bool)", params);</pre>
+
+<h3><a name=setSrc></a>void setSrc (QString src)<tt> [slot]</tt></h3>
+<p>
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(setSrc(QString)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setSrc(QString)", params);</pre>
+
+<h3><a name=setView></a>void setView (QString viewMode)<tt> [slot]</tt></h3>
+<p>method setView
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString)), object, SLOT(setView(QString)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setView(QString)", params);</pre>
+
+<h3><a name=setViewRect></a>void setViewRect (double left, double top, double width, double height)<tt> [slot]</tt></h3>
+<p>method setViewRect
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(double, double, double, double)), object, SLOT(setViewRect(double, double, double, double)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setViewRect(double, double, double, double)", params);</pre>
+
+<h3><a name=setViewScroll></a>void setViewScroll (QString viewMode, double offset)<tt> [slot]</tt></h3>
+<p>method setViewScroll
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(QString, double)), object, SLOT(setViewScroll(QString, double)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setViewScroll(QString, double)", params);</pre>
+
+<h3><a name=setZoom></a>void setZoom (double percent)<tt> [slot]</tt></h3>
+<p>method setZoom
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(double)), object, SLOT(setZoom(double)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setZoom(double)", params);</pre>
+
+<h3><a name=setZoomScroll></a>void setZoomScroll (double percent, double left, double top)<tt> [slot]</tt></h3>
+<p>method setZoomScroll
+
+<p>Connect a signal to this slot:<pre>
+	QObject::connect(sender, SIGNAL(someSignal(double, double, double)), object, SLOT(setZoomScroll(double, double, double)));</pre>
+<p>Or call the function directly:<pre>
+	QVariantList params = ...
+	object->dynamicCall("setZoomScroll(double, double, double)", params);</pre>
+
+<h3><a name=OnError></a>void OnError ()<tt> [signal]</tt></h3>
+<p>event OnError: Fired when an error occurs.
+
+<p>Connect a slot to this signal:<pre>
+	QObject::connect(object, SIGNAL(OnError()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=OnMessage></a>void OnMessage ()<tt> [signal]</tt></h3>
+<p>event OnMessage: Fired when a message is sent.
+
+<p>Connect a slot to this signal:<pre>
+	QObject::connect(object, SIGNAL(OnMessage()), receiver, SLOT(someSlot()));</pre>
+
+<h3><a name=exception></a>void exception (int code, QString source, QString disc, QString help)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:<pre>
+	QObject::connect(object, SIGNAL(exception(int, QString, QString, QString)), receiver, SLOT(someSlot(int, QString, QString, QString)));</pre>
+
+<h3><a name=propertyChanged></a>void propertyChanged (QString name)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:<pre>
+	QObject::connect(object, SIGNAL(propertyChanged(QString)), receiver, SLOT(someSlot(QString)));</pre>
+
+<h3><a name=signal></a>void signal (QString name, int argc, void* argv)<tt> [signal]</tt></h3>
+<p>
+<p>Connect a slot to this signal:<pre>
+	QObject::connect(object, SIGNAL(signal(QString, int, void*)), receiver, SLOT(someSlot(QString, int, void*)));</pre>
+
+<hr><h2>Property Documentation</h2>
+<h3><a name=objectName></a>QString objectName</h3>
+<p>
+<p>Read this property's value using QObject::property:<pre>
+	QString val = object->property("objectName").toString();
+</pre>
+Set this property' value using QObject::setProperty:<pre>
+	QString newValue = ...
+	object->setProperty("objectName", newValue);
+</pre>
+Or using the <a href="#setObjectName">setObjectName</a> slot.
+
+<h3><a name=control></a>QString control</h3>
+<p>
+<p>Read this property's value using QObject::property:<pre>
+	QString val = object->property("control").toString();
+</pre>
+Set this property' value using QObject::setProperty:<pre>
+	QString newValue = ...
+	object->setProperty("control", newValue);
+</pre>
+Or using the <a href="#setControl">setControl</a> slot.
+
+<h3><a name=messageHandler></a>QVariant messageHandler</h3>
+<p>property messageHandler
+
+<p>Read this property's value using QObject::property:<pre>
+	QVariant val = object->property("messageHandler").toVariant();
+</pre>
+Set this property' value using QObject::setProperty:<pre>
+	QVariant newValue = ...
+	object->setProperty("messageHandler", newValue);
+</pre>
+Or using the <a href="#setMessageHandler">setMessageHandler</a> slot.
+
+<h3><a name=src></a>QString src</h3>
+<p>property src
+
+<p>Read this property's value using QObject::property:<pre>
+	QString val = object->property("src").toString();
+</pre>
+Set this property' value using QObject::setProperty:<pre>
+	QString newValue = ...
+	object->setProperty("src", newValue);
+</pre>
+Or using the <a href="#setSrc">setSrc</a> slot.
+

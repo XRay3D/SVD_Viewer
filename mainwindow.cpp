@@ -5,6 +5,9 @@
 #include <QClipboard>
 #include <QSettings>
 #include <QShortcut>
+//#include "acropdf.h"
+//#include "communicator.h"
+//#include <QWebChannel>
 
 QString fileName { R"(C:\ST\STM32CubeIDE_1.7.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.productdb.debug_2.0.0.202107021202\resources\cmsis\STMicroelectronics_CMSIS_SVD\STM32L476.svd)" };
 
@@ -56,6 +59,7 @@ void MainWindow::loadSettings()
     restoreGeometry(settings.value("Geometry").toByteArray());
     restoreState(settings.value("State").toByteArray());
     ui->lePath->setText(settings.value("lePath", fileName).toString());
+    //    ui->lePdfPath->setText(settings.value("lePdfPath", fileName).toString());
 }
 
 void MainWindow::saveSettings()
@@ -65,6 +69,7 @@ void MainWindow::saveSettings()
     settings.setValue("Geometry", saveGeometry());
     settings.setValue("State", saveState());
     settings.setValue("lePath", ui->lePath->text());
+    //    settings.setValue("lePdfPath", ui->lePdfPath->text());
 }
 
 void MainWindow::doubleClicked(const QModelIndex& index)
@@ -94,6 +99,36 @@ void MainWindow::parse()
 {
     delete ui->treeView->model();
     peripherals.clear();
+    //    if (QFile::exists(ui->lePdfPath->text())) {
+    //        auto AcroPDF = new AcroPDFLib::AcroPDF(this);
+    //        ui->gridLayout->addWidget(AcroPDF, 1, 2);
+    //        qDebug() << "LoadFile" << AcroPDF->LoadFile(ui->lePdfPath->text());
+    //        //        QString app_path = qApp->applicationDirPath();
+    //        //#ifdef Q_OS_MACOS
+    //        //        QDir app_path_dir(app_path);
+    //        //        app_path_dir.cdUp();
+    //        //        app_path_dir.cdUp();
+    //        //        app_path_dir.cdUp();
+    //        //        app_path = app_path_dir.absolutePath();
+    //        //#endif
+    //        //        auto url = QUrl::fromLocalFile(app_path + "/minified/web/viewer.html");
+
+    //        //        QDir dir(app_path + "/minified/web/");
+    //        //        //        setWindowTitle(pdf_path);
+    //        //        QString pdf_path = dir.relativeFilePath(ui->lePdfPath->text());
+
+    //        //        m_communicator = new Communicator(this);
+    //        //        m_communicator->setUrl(pdf_path);
+
+    //        //        //ui->m_webView = new QWebEngineView(this);
+
+    //        //        QWebChannel* channel = new QWebChannel(this);
+    //        //        channel->registerObject(QStringLiteral("communicator"), m_communicator);
+    //        //        ui->m_webView->page()->setWebChannel(channel);
+
+    //        //        ui->m_webView->load(url);
+    //        //        //        setCentralWidget(m_webView);
+    //    }
     if (QFile::exists(ui->lePath->text())) {
         ui->treeView->setModel(new SvdModel { SvdParser(ui->lePath->text(), peripherals), ui->treeView });
         ui->treeView->header()->setSectionResizeMode(QHeaderView::Stretch);

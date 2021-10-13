@@ -8,6 +8,8 @@
 QT_BEGIN_NAMESPACE
 
 class CppHighlighter;
+class Communicator;
+
 namespace Ui {
 class MainWindow;
 }
@@ -23,6 +25,7 @@ public:
 private:
     Ui::MainWindow* ui;
     CppHighlighter* cppHighlighter;
+    Communicator* m_communicator;
 
     Peripherals peripherals;
 

@@ -60,18 +60,28 @@ void SvdParser::nextNode(SvdNode* const svdNodeParent, QDomNode& domNode)
                 if (svdNodeParent->data_[0] == "peripheral") {
                     auto& pls = peripherals.peripherals;
                     pls.reserve(1000);
-                    /* */ if (var->data_[0] == "name")
-                        pls.push_back({}), assign(pls.back().name);
-                    else if (var->data_[0] == "description")
+                    if (var->data_[0] == "name") {
+                        pls.push_back({});
+                        assign(pls.back().name);
+                        static QRegularExpression re { "derivedFrom = \"(\\S+)\"" };
+                        if (svdNodeParent->data_[2].isEmpty())
+                            peripherals.peripheralsMap[var->data_[1]] = &pls.back();
+                        else if (auto match { re.match(svdNodeParent->data_[2]) }; match.hasMatch())
+                            pls.back().peripheral = peripherals.peripheralsMap[match.captured(1)];
+                    } else if (var->data_[0] == "description")
                         assign(pls.back().description);
-                    else if (var->data_[0] == "groupName")
+                    else if (var->data_[0] == "groupName") {
                         assign(pls.back().groupName);
-                    else if (var->data_[0] == "baseAddress")
+                        if (!peripherals.groupMap.contains(var->data_[1])) {
+                            peripherals.groupMap[var->data_[1]].reserve(20);
+                            peripherals.groupMap[var->data_[1]].emplace_back(&pls.back());
+                        }
+                    } else if (var->data_[0] == "baseAddress")
                         assign(pls.back().baseAddress);
                 } else if (svdNodeParent->data_[0] == "register") {
                     auto& registers = peripherals.current().registers;
                     registers.reserve(100);
-                    /**/ if (var->data_[0] == "name")
+                    if /**/ (var->data_[0] == "name")
                         registers.push_back({}), assign(registers.back().name);
                     else if (var->data_[0] == "displayName")
                         assign(registers.back().displayName);
@@ -88,7 +98,7 @@ void SvdParser::nextNode(SvdNode* const svdNodeParent, QDomNode& domNode)
                 } else if (svdNodeParent->data_[0] == "field") {
                     auto& fields = peripherals.current().registers.back().fields;
                     fields.reserve(32);
-                    /* */ if (var->data_[0] == "name")
+                    if /**/ (var->data_[0] == "name")
                         fields.push_back({}), assign(fields.back().name);
                     else if (var->data_[0] == "description")
                         assign(fields.back().description);
@@ -96,6 +106,15 @@ void SvdParser::nextNode(SvdNode* const svdNodeParent, QDomNode& domNode)
                         assign(fields.back().bitOffset);
                     else if (var->data_[0] == "bitWidth")
                         assign(fields.back().bitWidth);
+                } else if (svdNodeParent->data_[0] == "interrupt") {
+                    auto& interrupt = peripherals.current().interrupts;
+                    interrupt.reserve(32);
+                    if /**/ (var->data_[0] == "name")
+                        interrupt.push_back({}), assign(interrupt.back().name);
+                    else if (var->data_[0] == "description")
+                        assign(interrupt.back().description);
+                    else if (var->data_[0] == "value")
+                        assign(interrupt.back().value);
                 }
             }
         }
