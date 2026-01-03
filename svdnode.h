@@ -8,31 +8,34 @@ class SvdNode {
 
 public:
     explicit SvdNode(const QStringList& data, SvdNode* parent = nullptr)
-        : data_(data)
-        , parent_ { parent }
-    {
+        : data_{data}
+        , parent_{parent} {
     }
-    //explicit SvdNode(const QList<QVariant>& data, SvdNode* parentItem = nullptr);
 
-    ~SvdNode() { qDeleteAll(childs_); }
+    ~SvdNode() = default;
 
     auto data(int column) const { return data_.value(column); }
 
-    SvdNode* child(int row) { return childs_.value(row); }
+    SvdNode* child(int row) { return childs_.at(row).get(); }
 
     SvdNode* parent() { return parent_; }
 
-    int childCount() const { return childs_.count(); }
+    int childCount() const { return childs_.size(); }
 
     int columnCount() const { return data_.count(); }
 
-    int row() const { return parent_ ? parent_->childs_.indexOf(const_cast<SvdNode*>(this)) : 0; }
+    int row() const {
+        if(parent_) {
+            auto it = std::ranges::find(parent_->childs_, this, &std::unique_ptr<SvdNode>::get);
+            return it - childs_.begin();
+        }
+        return 0;
+    }
 
-    void appendChild(SvdNode* item) { childs_.append(item); }
+    void appendChild(SvdNode* item) { childs_.emplace_back(item); }
 
 private:
     QStringList data_;
-    //QList<QVariant> data_;
-    QList<SvdNode*> childs_;
+    std::vector<std::unique_ptr<SvdNode>> childs_;
     SvdNode* const parent_;
 };

@@ -21,11 +21,9 @@
 
 struct IDispatch;
 
-
 // Referenced namespace
 
 namespace AcroPDFLib {
-
 
 // skipping event interface _IAcroPDFEvents
 
@@ -35,12 +33,12 @@ class ACROPDFLIB_EXPORT IAcroPDF : public QAxObject
 {
 public:
     IAcroPDF(IDispatch *subobject = 0, QAxObject *parent = 0)
-    : QAxObject((IUnknown*)subobject, parent)
+        : QAxObject((IUnknown *) subobject, parent)
     {
         internalRelease();
     }
 
-// meta object functions
+    // meta object functions
     static const QMetaObject staticMetaObject;
     virtual const QMetaObject *metaObject() const { return &staticMetaObject; }
     virtual void *qt_metacast(const char *);
@@ -50,7 +48,7 @@ class ACROPDFLIB_EXPORT IAcroAXDocShim : public QAxObject
 {
 public:
     IAcroAXDocShim(IDispatch *subobject = 0, QAxObject *parent = 0)
-    : QAxObject((IUnknown*)subobject, parent)
+        : QAxObject((IUnknown *) subobject, parent)
     {
         internalRelease();
     }
@@ -62,7 +60,8 @@ public:
 
     */
     inline QVariant messageHandler() const; //Returns the value of messageHandler
-    inline void setMessageHandler(const QVariant& value); //Sets the value of the messageHandler property
+    inline void setMessageHandler(
+        const QVariant &value); //Sets the value of the messageHandler property
 
     /*
     Property src
@@ -70,8 +69,8 @@ public:
     property src
 
     */
-    inline QString src() const; //Returns the value of src
-    inline void setSrc(const QString& value); //Sets the value of the src property
+    inline QString src() const;               //Returns the value of src
+    inline void setSrc(const QString &value); //Sets the value of the src property
 
     /*
     Method GetVersions
@@ -87,7 +86,7 @@ public:
     method LoadFile
 
     */
-    inline bool LoadFile(const QString& fileName);
+    inline bool LoadFile(const QString &fileName);
 
     /*
     Method Print
@@ -103,7 +102,7 @@ public:
     method execCommand
 
     */
-    inline void execCommand(const QVariant& strArray);
+    inline void execCommand(const QVariant &strArray);
 
     /*
     Method goBackwardStack
@@ -159,7 +158,7 @@ public:
     method postMesage
 
     */
-    inline void postMessage(const QVariant& strArray);
+    inline void postMessage(const QVariant &strArray);
 
     /*
     Method printAll
@@ -231,7 +230,7 @@ public:
     method setLayoutMode
 
     */
-    inline void setLayoutMode(const QString& layoutMode);
+    inline void setLayoutMode(const QString &layoutMode);
 
     /*
     Method setNamedDest
@@ -239,7 +238,7 @@ public:
     method setNamedDest
 
     */
-    inline void setNamedDest(const QString& namedDest);
+    inline void setNamedDest(const QString &namedDest);
 
     /*
     Method setPageMode
@@ -247,7 +246,7 @@ public:
     method setPageMode
 
     */
-    inline void setPageMode(const QString& pageMode);
+    inline void setPageMode(const QString &pageMode);
 
     /*
     Method setShowScrollbars
@@ -271,7 +270,7 @@ public:
     method setView
 
     */
-    inline void setView(const QString& viewMode);
+    inline void setView(const QString &viewMode);
 
     /*
     Method setViewRect
@@ -287,7 +286,7 @@ public:
     method setViewScroll
 
     */
-    inline void setViewScroll(const QString& viewMode, double offset);
+    inline void setViewScroll(const QString &viewMode, double offset);
 
     /*
     Method setZoom
@@ -305,7 +304,7 @@ public:
     */
     inline void setZoomScroll(double percent, double left, double top);
 
-// meta object functions
+    // meta object functions
     static const QMetaObject staticMetaObject;
     virtual const QMetaObject *metaObject() const { return &staticMetaObject; }
     virtual void *qt_metacast(const char *);
@@ -315,7 +314,7 @@ class ACROPDFLIB_EXPORT ISPOpenDocuments : public QAxObject
 {
 public:
     ISPOpenDocuments(IDispatch *subobject = 0, QAxObject *parent = 0)
-    : QAxObject((IUnknown*)subobject, parent)
+        : QAxObject((IUnknown *) subobject, parent)
     {
         internalRelease();
     }
@@ -326,7 +325,9 @@ public:
     method CheckinDocument
 
     */
-    inline bool CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment);
+    inline bool CheckinDocument(const QString &bstrDocumentLocation,
+                                int CheckinType,
+                                const QString &CheckinComment);
 
     /*
     Method CheckinDocument
@@ -334,7 +335,10 @@ public:
     method CheckinDocument
 
     */
-    inline bool CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment, bool bKeepCheckout);
+    inline bool CheckinDocument(const QString &bstrDocumentLocation,
+                                int CheckinType,
+                                const QString &CheckinComment,
+                                bool bKeepCheckout);
 
     /*
     Method CheckoutDocumentPrompt
@@ -342,7 +346,8 @@ public:
     method CheckoutDocumentPrompt
 
     */
-    inline bool CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout);
+    inline bool CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                       bool fEditAfterCheckout);
 
     /*
     Method CheckoutDocumentPrompt
@@ -350,7 +355,9 @@ public:
     method CheckoutDocumentPrompt
 
     */
-    inline bool CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout, const QVariant& varProgID);
+    inline bool CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                       bool fEditAfterCheckout,
+                                       const QVariant &varProgID);
 
     /*
     Method CreateNewDocument
@@ -358,7 +365,8 @@ public:
     method CreateNewDocument
 
     */
-    inline bool CreateNewDocument(const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation);
+    inline bool CreateNewDocument(const QString &bstrTemplateLocation,
+                                  const QString &bstrDefaultSaveLocation);
 
     /*
     Method CreateNewDocument2
@@ -366,7 +374,9 @@ public:
     method CreateNewDocument2
 
     */
-    inline bool CreateNewDocument2(IDispatch* pDisp, const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation);
+    inline bool CreateNewDocument2(IDispatch *pDisp,
+                                   const QString &bstrTemplateLocation,
+                                   const QString &bstrDefaultSaveLocation);
 
     /*
     Method DiscardLocalCheckout
@@ -374,7 +384,7 @@ public:
     method DiscardLocalCheckout
 
     */
-    inline bool DiscardLocalCheckout(const QString& bstrDocumentLocationRaw);
+    inline bool DiscardLocalCheckout(const QString &bstrDocumentLocationRaw);
 
     /*
     Method EditDocument
@@ -382,7 +392,7 @@ public:
     method EditDocument
 
     */
-    inline bool EditDocument(const QString& bstrDocumentLocation);
+    inline bool EditDocument(const QString &bstrDocumentLocation);
 
     /*
     Method EditDocument
@@ -390,7 +400,7 @@ public:
     method EditDocument
 
     */
-    inline bool EditDocument(const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool EditDocument(const QString &bstrDocumentLocation, const QVariant &varProgID);
 
     /*
     Method EditDocument2
@@ -398,7 +408,7 @@ public:
     method EditDocument2
 
     */
-    inline bool EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation);
+    inline bool EditDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation);
 
     /*
     Method EditDocument2
@@ -406,7 +416,9 @@ public:
     method EditDocument2
 
     */
-    inline bool EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool EditDocument2(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              const QVariant &varProgID);
 
     /*
     Method EditDocument3
@@ -414,7 +426,9 @@ public:
     method EditDocument3
 
     */
-    inline bool EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy);
+    inline bool EditDocument3(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              bool fUseLocalCopy);
 
     /*
     Method EditDocument3
@@ -422,7 +436,10 @@ public:
     method EditDocument3
 
     */
-    inline bool EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy, const QVariant& varProgID);
+    inline bool EditDocument3(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              bool fUseLocalCopy,
+                              const QVariant &varProgID);
 
     /*
     Method NewBlogPost
@@ -430,7 +447,9 @@ public:
     method NewBlogPost
 
     */
-    inline void NewBlogPost(const QString& bstrProviderId, const QString& bstrBlogUrl, const QString& bstrBlogName);
+    inline void NewBlogPost(const QString &bstrProviderId,
+                            const QString &bstrBlogUrl,
+                            const QString &bstrBlogName);
 
     /*
     Method PromptedOnLastOpen
@@ -446,7 +465,7 @@ public:
     method ViewDocument
 
     */
-    inline bool ViewDocument(const QString& bstrDocumentLocation);
+    inline bool ViewDocument(const QString &bstrDocumentLocation);
 
     /*
     Method ViewDocument
@@ -454,7 +473,7 @@ public:
     method ViewDocument
 
     */
-    inline bool ViewDocument(const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool ViewDocument(const QString &bstrDocumentLocation, const QVariant &varProgID);
 
     /*
     Method ViewDocument2
@@ -462,7 +481,7 @@ public:
     method ViewDocument2
 
     */
-    inline bool ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation);
+    inline bool ViewDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation);
 
     /*
     Method ViewDocument2
@@ -470,7 +489,9 @@ public:
     method ViewDocument2
 
     */
-    inline bool ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool ViewDocument2(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              const QVariant &varProgID);
 
     /*
     Method ViewDocument3
@@ -478,7 +499,7 @@ public:
     method ViewDocument3
 
     */
-    inline bool ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType);
+    inline bool ViewDocument3(IDispatch *pDisp, const QString &bstrDocumentLocation, int OpenType);
 
     /*
     Method ViewDocument3
@@ -486,7 +507,10 @@ public:
     method ViewDocument3
 
     */
-    inline bool ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType, const QVariant& varProgID);
+    inline bool ViewDocument3(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              int OpenType,
+                              const QVariant &varProgID);
 
     /*
     Method ViewInExcel
@@ -494,7 +518,13 @@ public:
     method ViewInExcel
 
     */
-    inline void ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column);
+    inline void ViewInExcel(const QString &SiteUrl,
+                            const QString &fileName,
+                            const QString &SessionId,
+                            const QString &Cmd,
+                            const QString &Sheet,
+                            int Row,
+                            int Column);
 
     /*
     Method ViewInExcel
@@ -502,9 +532,16 @@ public:
     method ViewInExcel
 
     */
-    inline void ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column, const QVariant& varProgID);
+    inline void ViewInExcel(const QString &SiteUrl,
+                            const QString &fileName,
+                            const QString &SessionId,
+                            const QString &Cmd,
+                            const QString &Sheet,
+                            int Row,
+                            int Column,
+                            const QVariant &varProgID);
 
-// meta object functions
+    // meta object functions
     static const QMetaObject staticMetaObject;
     virtual const QMetaObject *metaObject() const { return &staticMetaObject; }
     virtual void *qt_metacast(const char *);
@@ -514,12 +551,12 @@ class ACROPDFLIB_EXPORT ISPOpenDocumentsShim : public QAxObject
 {
 public:
     ISPOpenDocumentsShim(IDispatch *subobject = 0, QAxObject *parent = 0)
-    : QAxObject((IUnknown*)subobject, parent)
+        : QAxObject((IUnknown *) subobject, parent)
     {
         internalRelease();
     }
 
-// meta object functions
+    // meta object functions
     static const QMetaObject staticMetaObject;
     virtual const QMetaObject *metaObject() const { return &staticMetaObject; }
     virtual void *qt_metacast(const char *);
@@ -530,34 +567,34 @@ class ACROPDFLIB_EXPORT AcroPDF : public QAxWidget
 {
 public:
     AcroPDF(QWidget *parent = 0, Qt::WindowFlags f = 0)
-    : QAxWidget(parent, f)
+        : QAxWidget(parent, f)
     {
         setControl(QStringLiteral("{ca8a9780-280d-11cf-a24d-444553540000}"));
     }
 
     AcroPDF(IAcroPDF *iface)
-    : QAxWidget()
+        : QAxWidget()
     {
         initializeFrom(iface);
         delete iface;
     }
 
     AcroPDF(IAcroAXDocShim *iface)
-    : QAxWidget()
+        : QAxWidget()
     {
         initializeFrom(iface);
         delete iface;
     }
 
     AcroPDF(ISPOpenDocuments *iface)
-    : QAxWidget()
+        : QAxWidget()
     {
         initializeFrom(iface);
         delete iface;
     }
 
-    AcroPDF(/*_IAcroAXDocShimEvents*/QAxBase *iface)
-    : QAxWidget()
+    AcroPDF(/*_IAcroAXDocShimEvents*/ QAxBase *iface)
+        : QAxWidget()
     {
         initializeFrom(iface);
         delete iface;
@@ -570,7 +607,8 @@ public:
 
     */
     inline QVariant messageHandler() const; //Returns the value of messageHandler
-    inline void setMessageHandler(const QVariant& value); //Sets the value of the messageHandler property
+    inline void setMessageHandler(
+        const QVariant &value); //Sets the value of the messageHandler property
 
     /*
     Property src
@@ -578,73 +616,91 @@ public:
     property src
 
     */
-    inline QString src() const; //Returns the value of src
-    inline void setSrc(const QString& value); //Sets the value of the src property
+    inline QString src() const;               //Returns the value of src
+    inline void setSrc(const QString &value); //Sets the value of the src property
 
     /*
     Method CheckinDocument
     */
-    inline bool CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment);
+    inline bool CheckinDocument(const QString &bstrDocumentLocation,
+                                int CheckinType,
+                                const QString &CheckinComment);
 
     /*
     Method CheckinDocument
     */
-    inline bool CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment, bool bKeepCheckout);
+    inline bool CheckinDocument(const QString &bstrDocumentLocation,
+                                int CheckinType,
+                                const QString &CheckinComment,
+                                bool bKeepCheckout);
 
     /*
     Method CheckoutDocumentPrompt
     */
-    inline bool CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout);
+    inline bool CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                       bool fEditAfterCheckout);
 
     /*
     Method CheckoutDocumentPrompt
     */
-    inline bool CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout, const QVariant& varProgID);
+    inline bool CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                       bool fEditAfterCheckout,
+                                       const QVariant &varProgID);
 
     /*
     Method CreateNewDocument
     */
-    inline bool CreateNewDocument(const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation);
+    inline bool CreateNewDocument(const QString &bstrTemplateLocation,
+                                  const QString &bstrDefaultSaveLocation);
 
     /*
     Method CreateNewDocument2
     */
-    inline bool CreateNewDocument2(IDispatch* pDisp, const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation);
+    inline bool CreateNewDocument2(IDispatch *pDisp,
+                                   const QString &bstrTemplateLocation,
+                                   const QString &bstrDefaultSaveLocation);
 
     /*
     Method DiscardLocalCheckout
     */
-    inline bool DiscardLocalCheckout(const QString& bstrDocumentLocationRaw);
+    inline bool DiscardLocalCheckout(const QString &bstrDocumentLocationRaw);
 
     /*
     Method EditDocument
     */
-    inline bool EditDocument(const QString& bstrDocumentLocation);
+    inline bool EditDocument(const QString &bstrDocumentLocation);
 
     /*
     Method EditDocument
     */
-    inline bool EditDocument(const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool EditDocument(const QString &bstrDocumentLocation, const QVariant &varProgID);
 
     /*
     Method EditDocument2
     */
-    inline bool EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation);
+    inline bool EditDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation);
 
     /*
     Method EditDocument2
     */
-    inline bool EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool EditDocument2(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              const QVariant &varProgID);
 
     /*
     Method EditDocument3
     */
-    inline bool EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy);
+    inline bool EditDocument3(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              bool fUseLocalCopy);
 
     /*
     Method EditDocument3
     */
-    inline bool EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy, const QVariant& varProgID);
+    inline bool EditDocument3(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              bool fUseLocalCopy,
+                              const QVariant &varProgID);
 
     /*
     Method GetVersions
@@ -660,12 +716,14 @@ public:
     method LoadFile
 
     */
-    inline bool LoadFile(const QString& fileName);
+    inline bool LoadFile(const QString &fileName);
 
     /*
     Method NewBlogPost
     */
-    inline void NewBlogPost(const QString& bstrProviderId, const QString& bstrBlogUrl, const QString& bstrBlogName);
+    inline void NewBlogPost(const QString &bstrProviderId,
+                            const QString &bstrBlogUrl,
+                            const QString &bstrBlogName);
 
     /*
     Method OnError
@@ -693,42 +751,60 @@ public:
     /*
     Method ViewDocument
     */
-    inline bool ViewDocument(const QString& bstrDocumentLocation);
+    inline bool ViewDocument(const QString &bstrDocumentLocation);
 
     /*
     Method ViewDocument
     */
-    inline bool ViewDocument(const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool ViewDocument(const QString &bstrDocumentLocation, const QVariant &varProgID);
 
     /*
     Method ViewDocument2
     */
-    inline bool ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation);
+    inline bool ViewDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation);
 
     /*
     Method ViewDocument2
     */
-    inline bool ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool ViewDocument2(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              const QVariant &varProgID);
 
     /*
     Method ViewDocument3
     */
-    inline bool ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType);
+    inline bool ViewDocument3(IDispatch *pDisp, const QString &bstrDocumentLocation, int OpenType);
 
     /*
     Method ViewDocument3
     */
-    inline bool ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType, const QVariant& varProgID);
+    inline bool ViewDocument3(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              int OpenType,
+                              const QVariant &varProgID);
 
     /*
     Method ViewInExcel
     */
-    inline void ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column);
+    inline void ViewInExcel(const QString &SiteUrl,
+                            const QString &fileName,
+                            const QString &SessionId,
+                            const QString &Cmd,
+                            const QString &Sheet,
+                            int Row,
+                            int Column);
 
     /*
     Method ViewInExcel
     */
-    inline void ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column, const QVariant& varProgID);
+    inline void ViewInExcel(const QString &SiteUrl,
+                            const QString &fileName,
+                            const QString &SessionId,
+                            const QString &Cmd,
+                            const QString &Sheet,
+                            int Row,
+                            int Column,
+                            const QVariant &varProgID);
 
     /*
     Method execCommand
@@ -736,7 +812,7 @@ public:
     method execCommand
 
     */
-    inline void execCommand(const QVariant& strArray);
+    inline void execCommand(const QVariant &strArray);
 
     /*
     Method goBackwardStack
@@ -792,7 +868,7 @@ public:
     method postMesage
 
     */
-    inline void postMessage(const QVariant& strArray);
+    inline void postMessage(const QVariant &strArray);
 
     /*
     Method printAll
@@ -864,7 +940,7 @@ public:
     method setLayoutMode
 
     */
-    inline void setLayoutMode(const QString& layoutMode);
+    inline void setLayoutMode(const QString &layoutMode);
 
     /*
     Method setNamedDest
@@ -872,7 +948,7 @@ public:
     method setNamedDest
 
     */
-    inline void setNamedDest(const QString& namedDest);
+    inline void setNamedDest(const QString &namedDest);
 
     /*
     Method setPageMode
@@ -880,7 +956,7 @@ public:
     method setPageMode
 
     */
-    inline void setPageMode(const QString& pageMode);
+    inline void setPageMode(const QString &pageMode);
 
     /*
     Method setShowScrollbars
@@ -904,7 +980,7 @@ public:
     method setView
 
     */
-    inline void setView(const QString& viewMode);
+    inline void setView(const QString &viewMode);
 
     /*
     Method setViewRect
@@ -920,7 +996,7 @@ public:
     method setViewScroll
 
     */
-    inline void setViewScroll(const QString& viewMode, double offset);
+    inline void setViewScroll(const QString &viewMode, double offset);
 
     /*
     Method setZoom
@@ -938,7 +1014,7 @@ public:
     */
     inline void setZoomScroll(double percent, double left, double top);
 
-// meta object functions
+    // meta object functions
     static const QMetaObject staticMetaObject;
     virtual const QMetaObject *metaObject() const { return &staticMetaObject; }
     virtual void *qt_metacast(const char *);
@@ -948,20 +1024,20 @@ class ACROPDFLIB_EXPORT AdobeSPOpenDocumentsShim : public QAxWidget
 {
 public:
     AdobeSPOpenDocumentsShim(QWidget *parent = 0, Qt::WindowFlags f = 0)
-    : QAxWidget(parent, f)
+        : QAxWidget(parent, f)
     {
         setControl(QStringLiteral("{24da047b-40c0-4018-841b-6b7409f730fc}"));
     }
 
     AdobeSPOpenDocumentsShim(ISPOpenDocumentsShim *iface)
-    : QAxWidget()
+        : QAxWidget()
     {
         initializeFrom(iface);
         delete iface;
     }
 
     AdobeSPOpenDocumentsShim(ISPOpenDocuments *iface)
-    : QAxWidget()
+        : QAxWidget()
     {
         initializeFrom(iface);
         delete iface;
@@ -970,72 +1046,92 @@ public:
     /*
     Method CheckinDocument
     */
-    inline bool CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment);
+    inline bool CheckinDocument(const QString &bstrDocumentLocation,
+                                int CheckinType,
+                                const QString &CheckinComment);
 
     /*
     Method CheckinDocument
     */
-    inline bool CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment, bool bKeepCheckout);
+    inline bool CheckinDocument(const QString &bstrDocumentLocation,
+                                int CheckinType,
+                                const QString &CheckinComment,
+                                bool bKeepCheckout);
 
     /*
     Method CheckoutDocumentPrompt
     */
-    inline bool CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout);
+    inline bool CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                       bool fEditAfterCheckout);
 
     /*
     Method CheckoutDocumentPrompt
     */
-    inline bool CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout, const QVariant& varProgID);
+    inline bool CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                       bool fEditAfterCheckout,
+                                       const QVariant &varProgID);
 
     /*
     Method CreateNewDocument
     */
-    inline bool CreateNewDocument(const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation);
+    inline bool CreateNewDocument(const QString &bstrTemplateLocation,
+                                  const QString &bstrDefaultSaveLocation);
 
     /*
     Method CreateNewDocument2
     */
-    inline bool CreateNewDocument2(IDispatch* pDisp, const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation);
+    inline bool CreateNewDocument2(IDispatch *pDisp,
+                                   const QString &bstrTemplateLocation,
+                                   const QString &bstrDefaultSaveLocation);
 
     /*
     Method DiscardLocalCheckout
     */
-    inline bool DiscardLocalCheckout(const QString& bstrDocumentLocationRaw);
+    inline bool DiscardLocalCheckout(const QString &bstrDocumentLocationRaw);
 
     /*
     Method EditDocument
     */
-    inline bool EditDocument(const QString& bstrDocumentLocation);
+    inline bool EditDocument(const QString &bstrDocumentLocation);
 
     /*
     Method EditDocument
     */
-    inline bool EditDocument(const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool EditDocument(const QString &bstrDocumentLocation, const QVariant &varProgID);
 
     /*
     Method EditDocument2
     */
-    inline bool EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation);
+    inline bool EditDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation);
 
     /*
     Method EditDocument2
     */
-    inline bool EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool EditDocument2(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              const QVariant &varProgID);
 
     /*
     Method EditDocument3
     */
-    inline bool EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy);
+    inline bool EditDocument3(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              bool fUseLocalCopy);
 
     /*
     Method EditDocument3
     */
-    inline bool EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy, const QVariant& varProgID);
+    inline bool EditDocument3(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              bool fUseLocalCopy,
+                              const QVariant &varProgID);
 
     /*
     Method NewBlogPost
     */
-    inline void NewBlogPost(const QString& bstrProviderId, const QString& bstrBlogUrl, const QString& bstrBlogName);
+    inline void NewBlogPost(const QString &bstrProviderId,
+                            const QString &bstrBlogUrl,
+                            const QString &bstrBlogName);
 
     /*
     Method PromptedOnLastOpen
@@ -1045,44 +1141,62 @@ public:
     /*
     Method ViewDocument
     */
-    inline bool ViewDocument(const QString& bstrDocumentLocation);
+    inline bool ViewDocument(const QString &bstrDocumentLocation);
 
     /*
     Method ViewDocument
     */
-    inline bool ViewDocument(const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool ViewDocument(const QString &bstrDocumentLocation, const QVariant &varProgID);
 
     /*
     Method ViewDocument2
     */
-    inline bool ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation);
+    inline bool ViewDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation);
 
     /*
     Method ViewDocument2
     */
-    inline bool ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID);
+    inline bool ViewDocument2(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              const QVariant &varProgID);
 
     /*
     Method ViewDocument3
     */
-    inline bool ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType);
+    inline bool ViewDocument3(IDispatch *pDisp, const QString &bstrDocumentLocation, int OpenType);
 
     /*
     Method ViewDocument3
     */
-    inline bool ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType, const QVariant& varProgID);
+    inline bool ViewDocument3(IDispatch *pDisp,
+                              const QString &bstrDocumentLocation,
+                              int OpenType,
+                              const QVariant &varProgID);
 
     /*
     Method ViewInExcel
     */
-    inline void ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column);
+    inline void ViewInExcel(const QString &SiteUrl,
+                            const QString &fileName,
+                            const QString &SessionId,
+                            const QString &Cmd,
+                            const QString &Sheet,
+                            int Row,
+                            int Column);
 
     /*
     Method ViewInExcel
     */
-    inline void ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column, const QVariant& varProgID);
+    inline void ViewInExcel(const QString &SiteUrl,
+                            const QString &fileName,
+                            const QString &SessionId,
+                            const QString &Cmd,
+                            const QString &Sheet,
+                            int Row,
+                            int Column,
+                            const QVariant &varProgID);
 
-// meta object functions
+    // meta object functions
     static const QMetaObject staticMetaObject;
     virtual const QMetaObject *metaObject() const { return &staticMetaObject; }
     virtual void *qt_metacast(const char *);
@@ -1094,118 +1208,169 @@ inline QVariant AcroPDF::messageHandler() const
 {
     QVariant qax_result = property("messageHandler");
     Q_ASSERT(qax_result.isValid());
-    return *(QVariant*)qax_result.constData();
+    return *(QVariant *) qax_result.constData();
 }
-inline void AcroPDF::setMessageHandler(const QVariant& value){ setProperty("messageHandler", QVariant(value)); }
+inline void AcroPDF::setMessageHandler(const QVariant &value)
+{
+    setProperty("messageHandler", QVariant(value));
+}
 
 inline QString AcroPDF::src() const
 {
     QVariant qax_result = property("src");
     Q_ASSERT(qax_result.isValid());
-    return *(QString*)qax_result.constData();
+    return *(QString *) qax_result.constData();
 }
-inline void AcroPDF::setSrc(const QString& value){ setProperty("src", QVariant(value)); }
+inline void AcroPDF::setSrc(const QString &value)
+{
+    setProperty("src", QVariant(value));
+}
 
-inline bool AcroPDF::CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment)
+inline bool AcroPDF::CheckinDocument(const QString &bstrDocumentLocation,
+                                     int CheckinType,
+                                     const QString &CheckinComment)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&CheckinType, (void*)&CheckinComment};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &CheckinType,
+                  (void *) &CheckinComment};
     qt_metacall(QMetaObject::InvokeMetaMethod, 35, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment, bool bKeepCheckout)
+inline bool AcroPDF::CheckinDocument(const QString &bstrDocumentLocation,
+                                     int CheckinType,
+                                     const QString &CheckinComment,
+                                     bool bKeepCheckout)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&CheckinType, (void*)&CheckinComment, (void*)&bKeepCheckout};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &CheckinType,
+                  (void *) &CheckinComment,
+                  (void *) &bKeepCheckout};
     qt_metacall(QMetaObject::InvokeMetaMethod, 36, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout)
+inline bool AcroPDF::CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                            bool fEditAfterCheckout)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocationRaw, (void*)&fEditAfterCheckout};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocationRaw,
+                  (void *) &fEditAfterCheckout};
     qt_metacall(QMetaObject::InvokeMetaMethod, 37, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout, const QVariant& varProgID)
+inline bool AcroPDF::CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                            bool fEditAfterCheckout,
+                                            const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocationRaw, (void*)&fEditAfterCheckout, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocationRaw,
+                  (void *) &fEditAfterCheckout,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 38, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::CreateNewDocument(const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation)
+inline bool AcroPDF::CreateNewDocument(const QString &bstrTemplateLocation,
+                                       const QString &bstrDefaultSaveLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrTemplateLocation, (void*)&bstrDefaultSaveLocation};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrTemplateLocation,
+                  (void *) &bstrDefaultSaveLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 39, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::CreateNewDocument2(IDispatch* pDisp, const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation)
+inline bool AcroPDF::CreateNewDocument2(IDispatch *pDisp,
+                                        const QString &bstrTemplateLocation,
+                                        const QString &bstrDefaultSaveLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrTemplateLocation, (void*)&bstrDefaultSaveLocation};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrTemplateLocation,
+                  (void *) &bstrDefaultSaveLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 40, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::DiscardLocalCheckout(const QString& bstrDocumentLocationRaw)
+inline bool AcroPDF::DiscardLocalCheckout(const QString &bstrDocumentLocationRaw)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocationRaw};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocationRaw};
     qt_metacall(QMetaObject::InvokeMetaMethod, 41, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::EditDocument(const QString& bstrDocumentLocation)
+inline bool AcroPDF::EditDocument(const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 42, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::EditDocument(const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool AcroPDF::EditDocument(const QString &bstrDocumentLocation, const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation, (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 43, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation)
+inline bool AcroPDF::EditDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &pDisp, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 44, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool AcroPDF::EditDocument2(IDispatch *pDisp,
+                                   const QString &bstrDocumentLocation,
+                                   const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 45, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy)
+inline bool AcroPDF::EditDocument3(IDispatch *pDisp,
+                                   const QString &bstrDocumentLocation,
+                                   bool fUseLocalCopy)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&fUseLocalCopy};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &fUseLocalCopy};
     qt_metacall(QMetaObject::InvokeMetaMethod, 46, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy, const QVariant& varProgID)
+inline bool AcroPDF::EditDocument3(IDispatch *pDisp,
+                                   const QString &bstrDocumentLocation,
+                                   bool fUseLocalCopy,
+                                   const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&fUseLocalCopy, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &fUseLocalCopy,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 47, _a);
     return qax_result;
 }
@@ -1213,22 +1378,24 @@ inline bool AcroPDF::EditDocument3(IDispatch* pDisp, const QString& bstrDocument
 inline QVariant AcroPDF::GetVersions()
 {
     QVariant qax_result;
-    void *_a[] = {(void*)&qax_result};
+    void *_a[] = {(void *) &qax_result};
     qt_metacall(QMetaObject::InvokeMetaMethod, 48, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::LoadFile(const QString& fileName)
+inline bool AcroPDF::LoadFile(const QString &fileName)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&fileName};
+    void *_a[] = {(void *) &qax_result, (void *) &fileName};
     qt_metacall(QMetaObject::InvokeMetaMethod, 49, _a);
     return qax_result;
 }
 
-inline void AcroPDF::NewBlogPost(const QString& bstrProviderId, const QString& bstrBlogUrl, const QString& bstrBlogName)
+inline void AcroPDF::NewBlogPost(const QString &bstrProviderId,
+                                 const QString &bstrBlogUrl,
+                                 const QString &bstrBlogName)
 {
-    void *_a[] = {0, (void*)&bstrProviderId, (void*)&bstrBlogUrl, (void*)&bstrBlogName};
+    void *_a[] = {0, (void *) &bstrProviderId, (void *) &bstrBlogUrl, (void *) &bstrBlogName};
     qt_metacall(QMetaObject::InvokeMetaMethod, 50, _a);
 }
 
@@ -1253,74 +1420,119 @@ inline void AcroPDF::Print()
 inline bool AcroPDF::PromptedOnLastOpen()
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result};
+    void *_a[] = {(void *) &qax_result};
     qt_metacall(QMetaObject::InvokeMetaMethod, 54, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::ViewDocument(const QString& bstrDocumentLocation)
+inline bool AcroPDF::ViewDocument(const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 55, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::ViewDocument(const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool AcroPDF::ViewDocument(const QString &bstrDocumentLocation, const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation, (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 56, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation)
+inline bool AcroPDF::ViewDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &pDisp, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 57, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool AcroPDF::ViewDocument2(IDispatch *pDisp,
+                                   const QString &bstrDocumentLocation,
+                                   const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 58, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType)
+inline bool AcroPDF::ViewDocument3(IDispatch *pDisp,
+                                   const QString &bstrDocumentLocation,
+                                   int OpenType)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&OpenType};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &OpenType};
     qt_metacall(QMetaObject::InvokeMetaMethod, 59, _a);
     return qax_result;
 }
 
-inline bool AcroPDF::ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType, const QVariant& varProgID)
+inline bool AcroPDF::ViewDocument3(IDispatch *pDisp,
+                                   const QString &bstrDocumentLocation,
+                                   int OpenType,
+                                   const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&OpenType, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &OpenType,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 60, _a);
     return qax_result;
 }
 
-inline void AcroPDF::ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column)
+inline void AcroPDF::ViewInExcel(const QString &SiteUrl,
+                                 const QString &fileName,
+                                 const QString &SessionId,
+                                 const QString &Cmd,
+                                 const QString &Sheet,
+                                 int Row,
+                                 int Column)
 {
-    void *_a[] = {0, (void*)&SiteUrl, (void*)&fileName, (void*)&SessionId, (void*)&Cmd, (void*)&Sheet, (void*)&Row, (void*)&Column};
+    void *_a[] = {0,
+                  (void *) &SiteUrl,
+                  (void *) &fileName,
+                  (void *) &SessionId,
+                  (void *) &Cmd,
+                  (void *) &Sheet,
+                  (void *) &Row,
+                  (void *) &Column};
     qt_metacall(QMetaObject::InvokeMetaMethod, 61, _a);
 }
 
-inline void AcroPDF::ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column, const QVariant& varProgID)
+inline void AcroPDF::ViewInExcel(const QString &SiteUrl,
+                                 const QString &fileName,
+                                 const QString &SessionId,
+                                 const QString &Cmd,
+                                 const QString &Sheet,
+                                 int Row,
+                                 int Column,
+                                 const QVariant &varProgID)
 {
-    void *_a[] = {0, (void*)&SiteUrl, (void*)&fileName, (void*)&SessionId, (void*)&Cmd, (void*)&Sheet, (void*)&Row, (void*)&Column, (void*)&varProgID};
+    void *_a[] = {0,
+                  (void *) &SiteUrl,
+                  (void *) &fileName,
+                  (void *) &SessionId,
+                  (void *) &Cmd,
+                  (void *) &Sheet,
+                  (void *) &Row,
+                  (void *) &Column,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 62, _a);
 }
 
-inline void AcroPDF::execCommand(const QVariant& strArray)
+inline void AcroPDF::execCommand(const QVariant &strArray)
 {
-    void *_a[] = {0, (void*)&strArray};
+    void *_a[] = {0, (void *) &strArray};
     qt_metacall(QMetaObject::InvokeMetaMethod, 63, _a);
 }
 
@@ -1360,9 +1572,9 @@ inline void AcroPDF::gotoPreviousPage()
     qt_metacall(QMetaObject::InvokeMetaMethod, 69, _a);
 }
 
-inline void AcroPDF::postMessage(const QVariant& strArray)
+inline void AcroPDF::postMessage(const QVariant &strArray)
 {
-    void *_a[] = {0, (void*)&strArray};
+    void *_a[] = {0, (void *) &strArray};
     qt_metacall(QMetaObject::InvokeMetaMethod, 70, _a);
 }
 
@@ -1374,19 +1586,19 @@ inline void AcroPDF::printAll()
 
 inline void AcroPDF::printAllFit(bool shrinkToFit)
 {
-    void *_a[] = {0, (void*)&shrinkToFit};
+    void *_a[] = {0, (void *) &shrinkToFit};
     qt_metacall(QMetaObject::InvokeMetaMethod, 72, _a);
 }
 
 inline void AcroPDF::printPages(int from, int to)
 {
-    void *_a[] = {0, (void*)&from, (void*)&to};
+    void *_a[] = {0, (void *) &from, (void *) &to};
     qt_metacall(QMetaObject::InvokeMetaMethod, 73, _a);
 }
 
 inline void AcroPDF::printPagesFit(int from, int to, bool shrinkToFit)
 {
-    void *_a[] = {0, (void*)&from, (void*)&to, (void*)&shrinkToFit};
+    void *_a[] = {0, (void *) &from, (void *) &to, (void *) &shrinkToFit};
     qt_metacall(QMetaObject::InvokeMetaMethod, 74, _a);
 }
 
@@ -1398,112 +1610,116 @@ inline void AcroPDF::printWithDialog()
 
 inline void AcroPDF::setCurrentHighlight(int a, int b, int c, int d)
 {
-    void *_a[] = {0, (void*)&a, (void*)&b, (void*)&c, (void*)&d};
+    void *_a[] = {0, (void *) &a, (void *) &b, (void *) &c, (void *) &d};
     qt_metacall(QMetaObject::InvokeMetaMethod, 76, _a);
 }
 
 inline void AcroPDF::setCurrentHightlight(int a, int b, int c, int d)
 {
-    void *_a[] = {0, (void*)&a, (void*)&b, (void*)&c, (void*)&d};
+    void *_a[] = {0, (void *) &a, (void *) &b, (void *) &c, (void *) &d};
     qt_metacall(QMetaObject::InvokeMetaMethod, 77, _a);
 }
 
 inline void AcroPDF::setCurrentPage(int n)
 {
-    void *_a[] = {0, (void*)&n};
+    void *_a[] = {0, (void *) &n};
     qt_metacall(QMetaObject::InvokeMetaMethod, 78, _a);
 }
 
-inline void AcroPDF::setLayoutMode(const QString& layoutMode)
+inline void AcroPDF::setLayoutMode(const QString &layoutMode)
 {
-    void *_a[] = {0, (void*)&layoutMode};
+    void *_a[] = {0, (void *) &layoutMode};
     qt_metacall(QMetaObject::InvokeMetaMethod, 79, _a);
 }
 
-inline void AcroPDF::setNamedDest(const QString& namedDest)
+inline void AcroPDF::setNamedDest(const QString &namedDest)
 {
-    void *_a[] = {0, (void*)&namedDest};
+    void *_a[] = {0, (void *) &namedDest};
     qt_metacall(QMetaObject::InvokeMetaMethod, 81, _a);
 }
 
-inline void AcroPDF::setPageMode(const QString& pageMode)
+inline void AcroPDF::setPageMode(const QString &pageMode)
 {
-    void *_a[] = {0, (void*)&pageMode};
+    void *_a[] = {0, (void *) &pageMode};
     qt_metacall(QMetaObject::InvokeMetaMethod, 82, _a);
 }
 
 inline void AcroPDF::setShowScrollbars(bool On)
 {
-    void *_a[] = {0, (void*)&On};
+    void *_a[] = {0, (void *) &On};
     qt_metacall(QMetaObject::InvokeMetaMethod, 83, _a);
 }
 
 inline void AcroPDF::setShowToolbar(bool On)
 {
-    void *_a[] = {0, (void*)&On};
+    void *_a[] = {0, (void *) &On};
     qt_metacall(QMetaObject::InvokeMetaMethod, 84, _a);
 }
 
-inline void AcroPDF::setView(const QString& viewMode)
+inline void AcroPDF::setView(const QString &viewMode)
 {
-    void *_a[] = {0, (void*)&viewMode};
+    void *_a[] = {0, (void *) &viewMode};
     qt_metacall(QMetaObject::InvokeMetaMethod, 86, _a);
 }
 
 inline void AcroPDF::setViewRect(double left, double top, double width, double height)
 {
-    void *_a[] = {0, (void*)&left, (void*)&top, (void*)&width, (void*)&height};
+    void *_a[] = {0, (void *) &left, (void *) &top, (void *) &width, (void *) &height};
     qt_metacall(QMetaObject::InvokeMetaMethod, 87, _a);
 }
 
-inline void AcroPDF::setViewScroll(const QString& viewMode, double offset)
+inline void AcroPDF::setViewScroll(const QString &viewMode, double offset)
 {
-    void *_a[] = {0, (void*)&viewMode, (void*)&offset};
+    void *_a[] = {0, (void *) &viewMode, (void *) &offset};
     qt_metacall(QMetaObject::InvokeMetaMethod, 88, _a);
 }
 
 inline void AcroPDF::setZoom(double percent)
 {
-    void *_a[] = {0, (void*)&percent};
+    void *_a[] = {0, (void *) &percent};
     qt_metacall(QMetaObject::InvokeMetaMethod, 89, _a);
 }
 
 inline void AcroPDF::setZoomScroll(double percent, double left, double top)
 {
-    void *_a[] = {0, (void*)&percent, (void*)&left, (void*)&top};
+    void *_a[] = {0, (void *) &percent, (void *) &left, (void *) &top};
     qt_metacall(QMetaObject::InvokeMetaMethod, 90, _a);
 }
-
-
 
 inline QVariant IAcroAXDocShim::messageHandler() const
 {
     QVariant qax_result = property("messageHandler");
     Q_ASSERT(qax_result.isValid());
-    return *(QVariant*)qax_result.constData();
+    return *(QVariant *) qax_result.constData();
 }
-inline void IAcroAXDocShim::setMessageHandler(const QVariant& value){ setProperty("messageHandler", QVariant(value)); }
+inline void IAcroAXDocShim::setMessageHandler(const QVariant &value)
+{
+    setProperty("messageHandler", QVariant(value));
+}
 
 inline QString IAcroAXDocShim::src() const
 {
     QVariant qax_result = property("src");
     Q_ASSERT(qax_result.isValid());
-    return *(QString*)qax_result.constData();
+    return *(QString *) qax_result.constData();
 }
-inline void IAcroAXDocShim::setSrc(const QString& value){ setProperty("src", QVariant(value)); }
+inline void IAcroAXDocShim::setSrc(const QString &value)
+{
+    setProperty("src", QVariant(value));
+}
 
 inline QVariant IAcroAXDocShim::GetVersions()
 {
     QVariant qax_result;
-    void *_a[] = {(void*)&qax_result};
+    void *_a[] = {(void *) &qax_result};
     qt_metacall(QMetaObject::InvokeMetaMethod, 8, _a);
     return qax_result;
 }
 
-inline bool IAcroAXDocShim::LoadFile(const QString& fileName)
+inline bool IAcroAXDocShim::LoadFile(const QString &fileName)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&fileName};
+    void *_a[] = {(void *) &qax_result, (void *) &fileName};
     qt_metacall(QMetaObject::InvokeMetaMethod, 9, _a);
     return qax_result;
 }
@@ -1514,9 +1730,9 @@ inline void IAcroAXDocShim::Print()
     qt_metacall(QMetaObject::InvokeMetaMethod, 10, _a);
 }
 
-inline void IAcroAXDocShim::execCommand(const QVariant& strArray)
+inline void IAcroAXDocShim::execCommand(const QVariant &strArray)
 {
-    void *_a[] = {0, (void*)&strArray};
+    void *_a[] = {0, (void *) &strArray};
     qt_metacall(QMetaObject::InvokeMetaMethod, 11, _a);
 }
 
@@ -1556,9 +1772,9 @@ inline void IAcroAXDocShim::gotoPreviousPage()
     qt_metacall(QMetaObject::InvokeMetaMethod, 17, _a);
 }
 
-inline void IAcroAXDocShim::postMessage(const QVariant& strArray)
+inline void IAcroAXDocShim::postMessage(const QVariant &strArray)
 {
-    void *_a[] = {0, (void*)&strArray};
+    void *_a[] = {0, (void *) &strArray};
     qt_metacall(QMetaObject::InvokeMetaMethod, 18, _a);
 }
 
@@ -1570,19 +1786,19 @@ inline void IAcroAXDocShim::printAll()
 
 inline void IAcroAXDocShim::printAllFit(bool shrinkToFit)
 {
-    void *_a[] = {0, (void*)&shrinkToFit};
+    void *_a[] = {0, (void *) &shrinkToFit};
     qt_metacall(QMetaObject::InvokeMetaMethod, 20, _a);
 }
 
 inline void IAcroAXDocShim::printPages(int from, int to)
 {
-    void *_a[] = {0, (void*)&from, (void*)&to};
+    void *_a[] = {0, (void *) &from, (void *) &to};
     qt_metacall(QMetaObject::InvokeMetaMethod, 21, _a);
 }
 
 inline void IAcroAXDocShim::printPagesFit(int from, int to, bool shrinkToFit)
 {
-    void *_a[] = {0, (void*)&from, (void*)&to, (void*)&shrinkToFit};
+    void *_a[] = {0, (void *) &from, (void *) &to, (void *) &shrinkToFit};
     qt_metacall(QMetaObject::InvokeMetaMethod, 22, _a);
 }
 
@@ -1594,456 +1810,642 @@ inline void IAcroAXDocShim::printWithDialog()
 
 inline void IAcroAXDocShim::setCurrentHighlight(int a, int b, int c, int d)
 {
-    void *_a[] = {0, (void*)&a, (void*)&b, (void*)&c, (void*)&d};
+    void *_a[] = {0, (void *) &a, (void *) &b, (void *) &c, (void *) &d};
     qt_metacall(QMetaObject::InvokeMetaMethod, 24, _a);
 }
 
 inline void IAcroAXDocShim::setCurrentHightlight(int a, int b, int c, int d)
 {
-    void *_a[] = {0, (void*)&a, (void*)&b, (void*)&c, (void*)&d};
+    void *_a[] = {0, (void *) &a, (void *) &b, (void *) &c, (void *) &d};
     qt_metacall(QMetaObject::InvokeMetaMethod, 25, _a);
 }
 
 inline void IAcroAXDocShim::setCurrentPage(int n)
 {
-    void *_a[] = {0, (void*)&n};
+    void *_a[] = {0, (void *) &n};
     qt_metacall(QMetaObject::InvokeMetaMethod, 26, _a);
 }
 
-inline void IAcroAXDocShim::setLayoutMode(const QString& layoutMode)
+inline void IAcroAXDocShim::setLayoutMode(const QString &layoutMode)
 {
-    void *_a[] = {0, (void*)&layoutMode};
+    void *_a[] = {0, (void *) &layoutMode};
     qt_metacall(QMetaObject::InvokeMetaMethod, 27, _a);
 }
 
-inline void IAcroAXDocShim::setNamedDest(const QString& namedDest)
+inline void IAcroAXDocShim::setNamedDest(const QString &namedDest)
 {
-    void *_a[] = {0, (void*)&namedDest};
+    void *_a[] = {0, (void *) &namedDest};
     qt_metacall(QMetaObject::InvokeMetaMethod, 29, _a);
 }
 
-inline void IAcroAXDocShim::setPageMode(const QString& pageMode)
+inline void IAcroAXDocShim::setPageMode(const QString &pageMode)
 {
-    void *_a[] = {0, (void*)&pageMode};
+    void *_a[] = {0, (void *) &pageMode};
     qt_metacall(QMetaObject::InvokeMetaMethod, 30, _a);
 }
 
 inline void IAcroAXDocShim::setShowScrollbars(bool On)
 {
-    void *_a[] = {0, (void*)&On};
+    void *_a[] = {0, (void *) &On};
     qt_metacall(QMetaObject::InvokeMetaMethod, 31, _a);
 }
 
 inline void IAcroAXDocShim::setShowToolbar(bool On)
 {
-    void *_a[] = {0, (void*)&On};
+    void *_a[] = {0, (void *) &On};
     qt_metacall(QMetaObject::InvokeMetaMethod, 32, _a);
 }
 
-inline void IAcroAXDocShim::setView(const QString& viewMode)
+inline void IAcroAXDocShim::setView(const QString &viewMode)
 {
-    void *_a[] = {0, (void*)&viewMode};
+    void *_a[] = {0, (void *) &viewMode};
     qt_metacall(QMetaObject::InvokeMetaMethod, 34, _a);
 }
 
 inline void IAcroAXDocShim::setViewRect(double left, double top, double width, double height)
 {
-    void *_a[] = {0, (void*)&left, (void*)&top, (void*)&width, (void*)&height};
+    void *_a[] = {0, (void *) &left, (void *) &top, (void *) &width, (void *) &height};
     qt_metacall(QMetaObject::InvokeMetaMethod, 35, _a);
 }
 
-inline void IAcroAXDocShim::setViewScroll(const QString& viewMode, double offset)
+inline void IAcroAXDocShim::setViewScroll(const QString &viewMode, double offset)
 {
-    void *_a[] = {0, (void*)&viewMode, (void*)&offset};
+    void *_a[] = {0, (void *) &viewMode, (void *) &offset};
     qt_metacall(QMetaObject::InvokeMetaMethod, 36, _a);
 }
 
 inline void IAcroAXDocShim::setZoom(double percent)
 {
-    void *_a[] = {0, (void*)&percent};
+    void *_a[] = {0, (void *) &percent};
     qt_metacall(QMetaObject::InvokeMetaMethod, 37, _a);
 }
 
 inline void IAcroAXDocShim::setZoomScroll(double percent, double left, double top)
 {
-    void *_a[] = {0, (void*)&percent, (void*)&left, (void*)&top};
+    void *_a[] = {0, (void *) &percent, (void *) &left, (void *) &top};
     qt_metacall(QMetaObject::InvokeMetaMethod, 38, _a);
 }
 
-
-inline bool ISPOpenDocuments::CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment)
+inline bool ISPOpenDocuments::CheckinDocument(const QString &bstrDocumentLocation,
+                                              int CheckinType,
+                                              const QString &CheckinComment)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&CheckinType, (void*)&CheckinComment};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &CheckinType,
+                  (void *) &CheckinComment};
     qt_metacall(QMetaObject::InvokeMetaMethod, 8, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment, bool bKeepCheckout)
+inline bool ISPOpenDocuments::CheckinDocument(const QString &bstrDocumentLocation,
+                                              int CheckinType,
+                                              const QString &CheckinComment,
+                                              bool bKeepCheckout)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&CheckinType, (void*)&CheckinComment, (void*)&bKeepCheckout};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &CheckinType,
+                  (void *) &CheckinComment,
+                  (void *) &bKeepCheckout};
     qt_metacall(QMetaObject::InvokeMetaMethod, 9, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout)
+inline bool ISPOpenDocuments::CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                                     bool fEditAfterCheckout)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocationRaw, (void*)&fEditAfterCheckout};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocationRaw,
+                  (void *) &fEditAfterCheckout};
     qt_metacall(QMetaObject::InvokeMetaMethod, 10, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout, const QVariant& varProgID)
+inline bool ISPOpenDocuments::CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                                     bool fEditAfterCheckout,
+                                                     const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocationRaw, (void*)&fEditAfterCheckout, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocationRaw,
+                  (void *) &fEditAfterCheckout,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 11, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::CreateNewDocument(const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation)
+inline bool ISPOpenDocuments::CreateNewDocument(const QString &bstrTemplateLocation,
+                                                const QString &bstrDefaultSaveLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrTemplateLocation, (void*)&bstrDefaultSaveLocation};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrTemplateLocation,
+                  (void *) &bstrDefaultSaveLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 12, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::CreateNewDocument2(IDispatch* pDisp, const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation)
+inline bool ISPOpenDocuments::CreateNewDocument2(IDispatch *pDisp,
+                                                 const QString &bstrTemplateLocation,
+                                                 const QString &bstrDefaultSaveLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrTemplateLocation, (void*)&bstrDefaultSaveLocation};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrTemplateLocation,
+                  (void *) &bstrDefaultSaveLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 13, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::DiscardLocalCheckout(const QString& bstrDocumentLocationRaw)
+inline bool ISPOpenDocuments::DiscardLocalCheckout(const QString &bstrDocumentLocationRaw)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocationRaw};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocationRaw};
     qt_metacall(QMetaObject::InvokeMetaMethod, 14, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::EditDocument(const QString& bstrDocumentLocation)
+inline bool ISPOpenDocuments::EditDocument(const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 15, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::EditDocument(const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool ISPOpenDocuments::EditDocument(const QString &bstrDocumentLocation,
+                                           const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation, (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 16, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation)
+inline bool ISPOpenDocuments::EditDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &pDisp, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 17, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool ISPOpenDocuments::EditDocument2(IDispatch *pDisp,
+                                            const QString &bstrDocumentLocation,
+                                            const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 18, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy)
+inline bool ISPOpenDocuments::EditDocument3(IDispatch *pDisp,
+                                            const QString &bstrDocumentLocation,
+                                            bool fUseLocalCopy)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&fUseLocalCopy};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &fUseLocalCopy};
     qt_metacall(QMetaObject::InvokeMetaMethod, 19, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy, const QVariant& varProgID)
+inline bool ISPOpenDocuments::EditDocument3(IDispatch *pDisp,
+                                            const QString &bstrDocumentLocation,
+                                            bool fUseLocalCopy,
+                                            const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&fUseLocalCopy, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &fUseLocalCopy,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 20, _a);
     return qax_result;
 }
 
-inline void ISPOpenDocuments::NewBlogPost(const QString& bstrProviderId, const QString& bstrBlogUrl, const QString& bstrBlogName)
+inline void ISPOpenDocuments::NewBlogPost(const QString &bstrProviderId,
+                                          const QString &bstrBlogUrl,
+                                          const QString &bstrBlogName)
 {
-    void *_a[] = {0, (void*)&bstrProviderId, (void*)&bstrBlogUrl, (void*)&bstrBlogName};
+    void *_a[] = {0, (void *) &bstrProviderId, (void *) &bstrBlogUrl, (void *) &bstrBlogName};
     qt_metacall(QMetaObject::InvokeMetaMethod, 21, _a);
 }
 
 inline bool ISPOpenDocuments::PromptedOnLastOpen()
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result};
+    void *_a[] = {(void *) &qax_result};
     qt_metacall(QMetaObject::InvokeMetaMethod, 22, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::ViewDocument(const QString& bstrDocumentLocation)
+inline bool ISPOpenDocuments::ViewDocument(const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 23, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::ViewDocument(const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool ISPOpenDocuments::ViewDocument(const QString &bstrDocumentLocation,
+                                           const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation, (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 24, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation)
+inline bool ISPOpenDocuments::ViewDocument2(IDispatch *pDisp, const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &pDisp, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 25, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool ISPOpenDocuments::ViewDocument2(IDispatch *pDisp,
+                                            const QString &bstrDocumentLocation,
+                                            const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 26, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType)
+inline bool ISPOpenDocuments::ViewDocument3(IDispatch *pDisp,
+                                            const QString &bstrDocumentLocation,
+                                            int OpenType)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&OpenType};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &OpenType};
     qt_metacall(QMetaObject::InvokeMetaMethod, 27, _a);
     return qax_result;
 }
 
-inline bool ISPOpenDocuments::ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType, const QVariant& varProgID)
+inline bool ISPOpenDocuments::ViewDocument3(IDispatch *pDisp,
+                                            const QString &bstrDocumentLocation,
+                                            int OpenType,
+                                            const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&OpenType, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &OpenType,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 28, _a);
     return qax_result;
 }
 
-inline void ISPOpenDocuments::ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column)
+inline void ISPOpenDocuments::ViewInExcel(const QString &SiteUrl,
+                                          const QString &fileName,
+                                          const QString &SessionId,
+                                          const QString &Cmd,
+                                          const QString &Sheet,
+                                          int Row,
+                                          int Column)
 {
-    void *_a[] = {0, (void*)&SiteUrl, (void*)&fileName, (void*)&SessionId, (void*)&Cmd, (void*)&Sheet, (void*)&Row, (void*)&Column};
+    void *_a[] = {0,
+                  (void *) &SiteUrl,
+                  (void *) &fileName,
+                  (void *) &SessionId,
+                  (void *) &Cmd,
+                  (void *) &Sheet,
+                  (void *) &Row,
+                  (void *) &Column};
     qt_metacall(QMetaObject::InvokeMetaMethod, 29, _a);
 }
 
-inline void ISPOpenDocuments::ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column, const QVariant& varProgID)
+inline void ISPOpenDocuments::ViewInExcel(const QString &SiteUrl,
+                                          const QString &fileName,
+                                          const QString &SessionId,
+                                          const QString &Cmd,
+                                          const QString &Sheet,
+                                          int Row,
+                                          int Column,
+                                          const QVariant &varProgID)
 {
-    void *_a[] = {0, (void*)&SiteUrl, (void*)&fileName, (void*)&SessionId, (void*)&Cmd, (void*)&Sheet, (void*)&Row, (void*)&Column, (void*)&varProgID};
+    void *_a[] = {0,
+                  (void *) &SiteUrl,
+                  (void *) &fileName,
+                  (void *) &SessionId,
+                  (void *) &Cmd,
+                  (void *) &Sheet,
+                  (void *) &Row,
+                  (void *) &Column,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 30, _a);
 }
 
-
-inline bool AdobeSPOpenDocumentsShim::CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment)
+inline bool AdobeSPOpenDocumentsShim::CheckinDocument(const QString &bstrDocumentLocation,
+                                                      int CheckinType,
+                                                      const QString &CheckinComment)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&CheckinType, (void*)&CheckinComment};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &CheckinType,
+                  (void *) &CheckinComment};
     qt_metacall(QMetaObject::InvokeMetaMethod, 35, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::CheckinDocument(const QString& bstrDocumentLocation, int CheckinType, const QString& CheckinComment, bool bKeepCheckout)
+inline bool AdobeSPOpenDocumentsShim::CheckinDocument(const QString &bstrDocumentLocation,
+                                                      int CheckinType,
+                                                      const QString &CheckinComment,
+                                                      bool bKeepCheckout)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&CheckinType, (void*)&CheckinComment, (void*)&bKeepCheckout};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &CheckinType,
+                  (void *) &CheckinComment,
+                  (void *) &bKeepCheckout};
     qt_metacall(QMetaObject::InvokeMetaMethod, 36, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout)
+inline bool AdobeSPOpenDocumentsShim::CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                                             bool fEditAfterCheckout)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocationRaw, (void*)&fEditAfterCheckout};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocationRaw,
+                  (void *) &fEditAfterCheckout};
     qt_metacall(QMetaObject::InvokeMetaMethod, 37, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::CheckoutDocumentPrompt(const QString& bstrDocumentLocationRaw, bool fEditAfterCheckout, const QVariant& varProgID)
+inline bool AdobeSPOpenDocumentsShim::CheckoutDocumentPrompt(const QString &bstrDocumentLocationRaw,
+                                                             bool fEditAfterCheckout,
+                                                             const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocationRaw, (void*)&fEditAfterCheckout, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrDocumentLocationRaw,
+                  (void *) &fEditAfterCheckout,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 38, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::CreateNewDocument(const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation)
+inline bool AdobeSPOpenDocumentsShim::CreateNewDocument(const QString &bstrTemplateLocation,
+                                                        const QString &bstrDefaultSaveLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrTemplateLocation, (void*)&bstrDefaultSaveLocation};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &bstrTemplateLocation,
+                  (void *) &bstrDefaultSaveLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 39, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::CreateNewDocument2(IDispatch* pDisp, const QString& bstrTemplateLocation, const QString& bstrDefaultSaveLocation)
+inline bool AdobeSPOpenDocumentsShim::CreateNewDocument2(IDispatch *pDisp,
+                                                         const QString &bstrTemplateLocation,
+                                                         const QString &bstrDefaultSaveLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrTemplateLocation, (void*)&bstrDefaultSaveLocation};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrTemplateLocation,
+                  (void *) &bstrDefaultSaveLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 40, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::DiscardLocalCheckout(const QString& bstrDocumentLocationRaw)
+inline bool AdobeSPOpenDocumentsShim::DiscardLocalCheckout(const QString &bstrDocumentLocationRaw)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocationRaw};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocationRaw};
     qt_metacall(QMetaObject::InvokeMetaMethod, 41, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::EditDocument(const QString& bstrDocumentLocation)
+inline bool AdobeSPOpenDocumentsShim::EditDocument(const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 42, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::EditDocument(const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool AdobeSPOpenDocumentsShim::EditDocument(const QString &bstrDocumentLocation,
+                                                   const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation, (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 43, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation)
+inline bool AdobeSPOpenDocumentsShim::EditDocument2(IDispatch *pDisp,
+                                                    const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &pDisp, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 44, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::EditDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool AdobeSPOpenDocumentsShim::EditDocument2(IDispatch *pDisp,
+                                                    const QString &bstrDocumentLocation,
+                                                    const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 45, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy)
+inline bool AdobeSPOpenDocumentsShim::EditDocument3(IDispatch *pDisp,
+                                                    const QString &bstrDocumentLocation,
+                                                    bool fUseLocalCopy)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&fUseLocalCopy};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &fUseLocalCopy};
     qt_metacall(QMetaObject::InvokeMetaMethod, 46, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::EditDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, bool fUseLocalCopy, const QVariant& varProgID)
+inline bool AdobeSPOpenDocumentsShim::EditDocument3(IDispatch *pDisp,
+                                                    const QString &bstrDocumentLocation,
+                                                    bool fUseLocalCopy,
+                                                    const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&fUseLocalCopy, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &fUseLocalCopy,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 47, _a);
     return qax_result;
 }
 
-inline void AdobeSPOpenDocumentsShim::NewBlogPost(const QString& bstrProviderId, const QString& bstrBlogUrl, const QString& bstrBlogName)
+inline void AdobeSPOpenDocumentsShim::NewBlogPost(const QString &bstrProviderId,
+                                                  const QString &bstrBlogUrl,
+                                                  const QString &bstrBlogName)
 {
-    void *_a[] = {0, (void*)&bstrProviderId, (void*)&bstrBlogUrl, (void*)&bstrBlogName};
+    void *_a[] = {0, (void *) &bstrProviderId, (void *) &bstrBlogUrl, (void *) &bstrBlogName};
     qt_metacall(QMetaObject::InvokeMetaMethod, 48, _a);
 }
 
 inline bool AdobeSPOpenDocumentsShim::PromptedOnLastOpen()
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result};
+    void *_a[] = {(void *) &qax_result};
     qt_metacall(QMetaObject::InvokeMetaMethod, 49, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::ViewDocument(const QString& bstrDocumentLocation)
+inline bool AdobeSPOpenDocumentsShim::ViewDocument(const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 50, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::ViewDocument(const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool AdobeSPOpenDocumentsShim::ViewDocument(const QString &bstrDocumentLocation,
+                                                   const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result, (void *) &bstrDocumentLocation, (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 51, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation)
+inline bool AdobeSPOpenDocumentsShim::ViewDocument2(IDispatch *pDisp,
+                                                    const QString &bstrDocumentLocation)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation};
+    void *_a[] = {(void *) &qax_result, (void *) &pDisp, (void *) &bstrDocumentLocation};
     qt_metacall(QMetaObject::InvokeMetaMethod, 52, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::ViewDocument2(IDispatch* pDisp, const QString& bstrDocumentLocation, const QVariant& varProgID)
+inline bool AdobeSPOpenDocumentsShim::ViewDocument2(IDispatch *pDisp,
+                                                    const QString &bstrDocumentLocation,
+                                                    const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 53, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType)
+inline bool AdobeSPOpenDocumentsShim::ViewDocument3(IDispatch *pDisp,
+                                                    const QString &bstrDocumentLocation,
+                                                    int OpenType)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&OpenType};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &OpenType};
     qt_metacall(QMetaObject::InvokeMetaMethod, 54, _a);
     return qax_result;
 }
 
-inline bool AdobeSPOpenDocumentsShim::ViewDocument3(IDispatch* pDisp, const QString& bstrDocumentLocation, int OpenType, const QVariant& varProgID)
+inline bool AdobeSPOpenDocumentsShim::ViewDocument3(IDispatch *pDisp,
+                                                    const QString &bstrDocumentLocation,
+                                                    int OpenType,
+                                                    const QVariant &varProgID)
 {
     bool qax_result;
-    void *_a[] = {(void*)&qax_result, (void*)&pDisp, (void*)&bstrDocumentLocation, (void*)&OpenType, (void*)&varProgID};
+    void *_a[] = {(void *) &qax_result,
+                  (void *) &pDisp,
+                  (void *) &bstrDocumentLocation,
+                  (void *) &OpenType,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 55, _a);
     return qax_result;
 }
 
-inline void AdobeSPOpenDocumentsShim::ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column)
+inline void AdobeSPOpenDocumentsShim::ViewInExcel(const QString &SiteUrl,
+                                                  const QString &fileName,
+                                                  const QString &SessionId,
+                                                  const QString &Cmd,
+                                                  const QString &Sheet,
+                                                  int Row,
+                                                  int Column)
 {
-    void *_a[] = {0, (void*)&SiteUrl, (void*)&fileName, (void*)&SessionId, (void*)&Cmd, (void*)&Sheet, (void*)&Row, (void*)&Column};
+    void *_a[] = {0,
+                  (void *) &SiteUrl,
+                  (void *) &fileName,
+                  (void *) &SessionId,
+                  (void *) &Cmd,
+                  (void *) &Sheet,
+                  (void *) &Row,
+                  (void *) &Column};
     qt_metacall(QMetaObject::InvokeMetaMethod, 56, _a);
 }
 
-inline void AdobeSPOpenDocumentsShim::ViewInExcel(const QString& SiteUrl, const QString& fileName, const QString& SessionId, const QString& Cmd, const QString& Sheet, int Row, int Column, const QVariant& varProgID)
+inline void AdobeSPOpenDocumentsShim::ViewInExcel(const QString &SiteUrl,
+                                                  const QString &fileName,
+                                                  const QString &SessionId,
+                                                  const QString &Cmd,
+                                                  const QString &Sheet,
+                                                  int Row,
+                                                  int Column,
+                                                  const QVariant &varProgID)
 {
-    void *_a[] = {0, (void*)&SiteUrl, (void*)&fileName, (void*)&SessionId, (void*)&Cmd, (void*)&Sheet, (void*)&Row, (void*)&Column, (void*)&varProgID};
+    void *_a[] = {0,
+                  (void *) &SiteUrl,
+                  (void *) &fileName,
+                  (void *) &SessionId,
+                  (void *) &Cmd,
+                  (void *) &Sheet,
+                  (void *) &Row,
+                  (void *) &Column,
+                  (void *) &varProgID};
     qt_metacall(QMetaObject::InvokeMetaMethod, 57, _a);
 }
 
-
-
-
 #endif
 
-}
+} // namespace AcroPDFLib
 
 QT_BEGIN_NAMESPACE
 
 namespace QtMetaTypePrivate {
 template<>
-struct QMetaTypeFunctionHelper<AcroPDFLib::AcroPDF, /* Accepted */ true> {
+struct QMetaTypeFunctionHelper<AcroPDFLib::AcroPDF, /* Accepted */ true>
+{
     static void Destruct(void *t)
     {
         Q_UNUSED(t)
-        static_cast<AcroPDFLib::AcroPDF*>(t)->AcroPDFLib::AcroPDF::~AcroPDF();
+        static_cast<AcroPDFLib::AcroPDF *>(t)->AcroPDFLib::AcroPDF::~AcroPDF();
     }
     static void *Construct(void *where, const void *t)
     {
@@ -2052,17 +2454,24 @@ struct QMetaTypeFunctionHelper<AcroPDFLib::AcroPDF, /* Accepted */ true> {
         return new (where) AcroPDFLib::AcroPDF;
     }
 #ifndef QT_NO_DATASTREAM
-    static void Save(QDataStream &stream, const void *t) { stream << *static_cast<const AcroPDFLib::AcroPDF*>(t); }
-    static void Load(QDataStream &stream, void *t) { stream >> *static_cast<AcroPDFLib::AcroPDF*>(t); }
+    static void Save(QDataStream &stream, const void *t)
+    {
+        stream << *static_cast<const AcroPDFLib::AcroPDF *>(t);
+    }
+    static void Load(QDataStream &stream, void *t)
+    {
+        stream >> *static_cast<AcroPDFLib::AcroPDF *>(t);
+    }
 #endif // QT_NO_DATASTREAM
 };
 
 template<>
-struct QMetaTypeFunctionHelper<AcroPDFLib::IAcroPDF, /* Accepted */ true> {
+struct QMetaTypeFunctionHelper<AcroPDFLib::IAcroPDF, /* Accepted */ true>
+{
     static void Destruct(void *t)
     {
         Q_UNUSED(t)
-        static_cast<AcroPDFLib::IAcroPDF*>(t)->AcroPDFLib::IAcroPDF::~IAcroPDF();
+        static_cast<AcroPDFLib::IAcroPDF *>(t)->AcroPDFLib::IAcroPDF::~IAcroPDF();
     }
     static void *Construct(void *where, const void *t)
     {
@@ -2071,17 +2480,24 @@ struct QMetaTypeFunctionHelper<AcroPDFLib::IAcroPDF, /* Accepted */ true> {
         return new (where) AcroPDFLib::IAcroPDF;
     }
 #ifndef QT_NO_DATASTREAM
-    static void Save(QDataStream &stream, const void *t) { stream << *static_cast<const AcroPDFLib::IAcroPDF*>(t); }
-    static void Load(QDataStream &stream, void *t) { stream >> *static_cast<AcroPDFLib::IAcroPDF*>(t); }
+    static void Save(QDataStream &stream, const void *t)
+    {
+        stream << *static_cast<const AcroPDFLib::IAcroPDF *>(t);
+    }
+    static void Load(QDataStream &stream, void *t)
+    {
+        stream >> *static_cast<AcroPDFLib::IAcroPDF *>(t);
+    }
 #endif // QT_NO_DATASTREAM
 };
 
 template<>
-struct QMetaTypeFunctionHelper<AcroPDFLib::IAcroAXDocShim, /* Accepted */ true> {
+struct QMetaTypeFunctionHelper<AcroPDFLib::IAcroAXDocShim, /* Accepted */ true>
+{
     static void Destruct(void *t)
     {
         Q_UNUSED(t)
-        static_cast<AcroPDFLib::IAcroAXDocShim*>(t)->AcroPDFLib::IAcroAXDocShim::~IAcroAXDocShim();
+        static_cast<AcroPDFLib::IAcroAXDocShim *>(t)->AcroPDFLib::IAcroAXDocShim::~IAcroAXDocShim();
     }
     static void *Construct(void *where, const void *t)
     {
@@ -2090,17 +2506,25 @@ struct QMetaTypeFunctionHelper<AcroPDFLib::IAcroAXDocShim, /* Accepted */ true> 
         return new (where) AcroPDFLib::IAcroAXDocShim;
     }
 #ifndef QT_NO_DATASTREAM
-    static void Save(QDataStream &stream, const void *t) { stream << *static_cast<const AcroPDFLib::IAcroAXDocShim*>(t); }
-    static void Load(QDataStream &stream, void *t) { stream >> *static_cast<AcroPDFLib::IAcroAXDocShim*>(t); }
+    static void Save(QDataStream &stream, const void *t)
+    {
+        stream << *static_cast<const AcroPDFLib::IAcroAXDocShim *>(t);
+    }
+    static void Load(QDataStream &stream, void *t)
+    {
+        stream >> *static_cast<AcroPDFLib::IAcroAXDocShim *>(t);
+    }
 #endif // QT_NO_DATASTREAM
 };
 
 template<>
-struct QMetaTypeFunctionHelper<AcroPDFLib::ISPOpenDocuments, /* Accepted */ true> {
+struct QMetaTypeFunctionHelper<AcroPDFLib::ISPOpenDocuments, /* Accepted */ true>
+{
     static void Destruct(void *t)
     {
         Q_UNUSED(t)
-        static_cast<AcroPDFLib::ISPOpenDocuments*>(t)->AcroPDFLib::ISPOpenDocuments::~ISPOpenDocuments();
+        static_cast<AcroPDFLib::ISPOpenDocuments *>(t)
+            ->AcroPDFLib::ISPOpenDocuments::~ISPOpenDocuments();
     }
     static void *Construct(void *where, const void *t)
     {
@@ -2109,17 +2533,25 @@ struct QMetaTypeFunctionHelper<AcroPDFLib::ISPOpenDocuments, /* Accepted */ true
         return new (where) AcroPDFLib::ISPOpenDocuments;
     }
 #ifndef QT_NO_DATASTREAM
-    static void Save(QDataStream &stream, const void *t) { stream << *static_cast<const AcroPDFLib::ISPOpenDocuments*>(t); }
-    static void Load(QDataStream &stream, void *t) { stream >> *static_cast<AcroPDFLib::ISPOpenDocuments*>(t); }
+    static void Save(QDataStream &stream, const void *t)
+    {
+        stream << *static_cast<const AcroPDFLib::ISPOpenDocuments *>(t);
+    }
+    static void Load(QDataStream &stream, void *t)
+    {
+        stream >> *static_cast<AcroPDFLib::ISPOpenDocuments *>(t);
+    }
 #endif // QT_NO_DATASTREAM
 };
 
 template<>
-struct QMetaTypeFunctionHelper<AcroPDFLib::AdobeSPOpenDocumentsShim, /* Accepted */ true> {
+struct QMetaTypeFunctionHelper<AcroPDFLib::AdobeSPOpenDocumentsShim, /* Accepted */ true>
+{
     static void Destruct(void *t)
     {
         Q_UNUSED(t)
-        static_cast<AcroPDFLib::AdobeSPOpenDocumentsShim*>(t)->AcroPDFLib::AdobeSPOpenDocumentsShim::~AdobeSPOpenDocumentsShim();
+        static_cast<AcroPDFLib::AdobeSPOpenDocumentsShim *>(t)
+            ->AcroPDFLib::AdobeSPOpenDocumentsShim::~AdobeSPOpenDocumentsShim();
     }
     static void *Construct(void *where, const void *t)
     {
@@ -2128,17 +2560,25 @@ struct QMetaTypeFunctionHelper<AcroPDFLib::AdobeSPOpenDocumentsShim, /* Accepted
         return new (where) AcroPDFLib::AdobeSPOpenDocumentsShim;
     }
 #ifndef QT_NO_DATASTREAM
-    static void Save(QDataStream &stream, const void *t) { stream << *static_cast<const AcroPDFLib::AdobeSPOpenDocumentsShim*>(t); }
-    static void Load(QDataStream &stream, void *t) { stream >> *static_cast<AcroPDFLib::AdobeSPOpenDocumentsShim*>(t); }
+    static void Save(QDataStream &stream, const void *t)
+    {
+        stream << *static_cast<const AcroPDFLib::AdobeSPOpenDocumentsShim *>(t);
+    }
+    static void Load(QDataStream &stream, void *t)
+    {
+        stream >> *static_cast<AcroPDFLib::AdobeSPOpenDocumentsShim *>(t);
+    }
 #endif // QT_NO_DATASTREAM
 };
 
 template<>
-struct QMetaTypeFunctionHelper<AcroPDFLib::ISPOpenDocumentsShim, /* Accepted */ true> {
+struct QMetaTypeFunctionHelper<AcroPDFLib::ISPOpenDocumentsShim, /* Accepted */ true>
+{
     static void Destruct(void *t)
     {
         Q_UNUSED(t)
-        static_cast<AcroPDFLib::ISPOpenDocumentsShim*>(t)->AcroPDFLib::ISPOpenDocumentsShim::~ISPOpenDocumentsShim();
+        static_cast<AcroPDFLib::ISPOpenDocumentsShim *>(t)
+            ->AcroPDFLib::ISPOpenDocumentsShim::~ISPOpenDocumentsShim();
     }
     static void *Construct(void *where, const void *t)
     {
@@ -2147,8 +2587,14 @@ struct QMetaTypeFunctionHelper<AcroPDFLib::ISPOpenDocumentsShim, /* Accepted */ 
         return new (where) AcroPDFLib::ISPOpenDocumentsShim;
     }
 #ifndef QT_NO_DATASTREAM
-    static void Save(QDataStream &stream, const void *t) { stream << *static_cast<const AcroPDFLib::ISPOpenDocumentsShim*>(t); }
-    static void Load(QDataStream &stream, void *t) { stream >> *static_cast<AcroPDFLib::ISPOpenDocumentsShim*>(t); }
+    static void Save(QDataStream &stream, const void *t)
+    {
+        stream << *static_cast<const AcroPDFLib::ISPOpenDocumentsShim *>(t);
+    }
+    static void Load(QDataStream &stream, void *t)
+    {
+        stream >> *static_cast<AcroPDFLib::ISPOpenDocumentsShim *>(t);
+    }
 #endif // QT_NO_DATASTREAM
 };
 
@@ -2156,4 +2602,3 @@ struct QMetaTypeFunctionHelper<AcroPDFLib::ISPOpenDocumentsShim, /* Accepted */ 
 QT_END_NAMESPACE
 
 #endif
-

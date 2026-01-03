@@ -1,9 +1,8 @@
-
-#include <QApplication>
 #include "communicator.h"
+#include <QApplication>
 
-void Communicator::setUrl(const QString & data) {
-	if (data == m_url) return;
-	m_url = data;
-	emit urlChanged(m_url);
+void Communicator::setUrl(const QString& data) {
+    if(data == url_) return;
+    url_ = data;
+    emit urlChanged(url_);
 }

@@ -3,14 +3,15 @@
 #include <QApplication>
 #include <QSettings>
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     QApplication a(argc, argv);
-    QApplication::setApplicationName("SVD_Viewer");
-    QApplication::setOrganizationName("XR Soft");
+    QApplication::setApplicationName(u"SVD_Viewer"_s);
+    QApplication::setOrganizationName(u"XR Soft"_s);
 
     QSettings::setDefaultFormat(QSettings::IniFormat);
-    QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, QApplication::applicationDirPath());
+    QSettings::setPath(QSettings::IniFormat,
+        QSettings::UserScope,
+        QApplication::applicationDirPath());
 
     MainWindow w;
     w.show();

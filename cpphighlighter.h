@@ -57,7 +57,7 @@ QT_BEGIN_NAMESPACE
 class QTextDocument;
 QT_END_NAMESPACE
 
-class CppHighlighter : public QSyntaxHighlighter {
+class CppHighlighter final : public QSyntaxHighlighter {
     Q_OBJECT
 
 public:

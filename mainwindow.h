@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include "peripherals.h"
 
@@ -25,7 +24,7 @@ public:
 private:
     Ui::MainWindow* ui;
     CppHighlighter* cppHighlighter;
-    Communicator* m_communicator;
+    Communicator* communicator_;
 
     Peripherals peripherals;
 
@@ -35,4 +34,3 @@ private:
     void doubleClicked(const QModelIndex& index);
     void parse();
 };
-#endif // MAINWINDOW_H

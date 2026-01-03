@@ -4,6 +4,8 @@
 #include <set>
 #include <unordered_map>
 
+using namespace Qt::Literals;
+
 class QTextEdit;
 
 struct Field {
@@ -30,7 +32,7 @@ struct Register {
 };
 
 struct Peripheral {
-    Peripheral* peripheral {};
+    Peripheral* peripheral{};
     QByteArray name;
     QByteArray description;
     QByteArray groupName;

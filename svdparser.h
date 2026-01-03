@@ -6,10 +6,10 @@ class Peripherals;
 class QDomNode;
 
 class SvdParser {
-    SvdNode* node_ {};
-    void nextNode(SvdNode * const svdNodeParent, QDomNode& domNode);
+    SvdNode* node_{};
+    void nextNode(SvdNode* const svdNodeParent, QDomNode& domNode);
     Peripherals& peripherals;
-    bool isPeripheral {};
+    bool isPeripheral{};
 
 public:
     SvdParser(const QString& fileName, Peripherals& peripherals);

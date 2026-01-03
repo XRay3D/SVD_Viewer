@@ -5,20 +5,20 @@
 #include <QClipboard>
 #include <QSettings>
 #include <QShortcut>
-//#include "acropdf.h"
-//#include "communicator.h"
-//#include <QWebChannel>
+// #include "acropdf.h"
+// #include "communicator.h"
+// #include <QWebChannel>
 
-QString fileName { R"(C:\ST\STM32CubeIDE_1.7.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.productdb.debug_2.0.0.202107021202\resources\cmsis\STMicroelectronics_CMSIS_SVD\STM32L476.svd)" };
+QString fileName{
+    uR"(C:\ST\STM32CubeIDE_1.7.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.productdb.debug_2.0.0.202107021202\resources\cmsis\STMicroelectronics_CMSIS_SVD\STM32L476.svd)"_s};
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+    , ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
     cppHighlighter = new CppHighlighter(ui->textEdit->document());
-    ui->textEdit->setFont({ "JetBrains Mono Light", 10 });
+    ui->textEdit->setFont({u"JetBrains Mono Light"_s, 10});
     const int tabStop = 4; // 4 characters
 
     QFontMetricsF metrics(ui->textEdit->font());
@@ -30,55 +30,52 @@ MainWindow::MainWindow(QWidget* parent)
     loadSettings();
 
     ui->pbOpen->click();
-    menuBar()->addAction("&Expand All", ui->treeView, &QTreeView::expandAll);
+    menuBar()->addAction(u"&Expand All"_s, ui->treeView, &QTreeView::expandAll);
 
     connect(new QShortcut(QKeySequence::Copy, this), &QShortcut::activated, [this] {
-        auto selectedRows { ui->treeView->selectionModel()->selectedRows() };
-        if (selectedRows.size()) {
+        auto selectedRows{ui->treeView->selectionModel()->selectedRows()};
+        if(selectedRows.size()) {
             QClipboard* clipboard = QGuiApplication::clipboard();
             QString originalText = clipboard->text();
             QString newText;
-            for (auto&& index : selectedRows) {
-                newText += QString("QString %1;\n").arg(index.data().toString());
+            for(auto&& index: selectedRows) {
+                newText += u"QString %1;\n"_s.arg(index.data().toString());
             }
             clipboard->setText(newText);
         }
     });
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     saveSettings();
     delete ui;
 }
 
-void MainWindow::loadSettings()
-{
+void MainWindow::loadSettings() {
     QSettings settings;
     settings.beginGroup("MainWindow");
     restoreGeometry(settings.value("Geometry").toByteArray());
     restoreState(settings.value("State").toByteArray());
     ui->lePath->setText(settings.value("lePath", fileName).toString());
+    ui->splitter->restoreState(settings.value("splitter").toByteArray());
     //    ui->lePdfPath->setText(settings.value("lePdfPath", fileName).toString());
 }
 
-void MainWindow::saveSettings()
-{
+void MainWindow::saveSettings() {
     QSettings settings;
     settings.beginGroup("MainWindow");
     settings.setValue("Geometry", saveGeometry());
     settings.setValue("State", saveState());
+    settings.setValue("splitter", ui->splitter->saveState());
     settings.setValue("lePath", ui->lePath->text());
     //    settings.setValue("lePdfPath", ui->lePdfPath->text());
 }
 
-void MainWindow::doubleClicked(const QModelIndex& index)
-{
+void MainWindow::doubleClicked(const QModelIndex& index) {
     class TreeView : public QTreeView {
     public:
-        TreeView(const QModelIndex& index)
-        {
-            setModel(new SvdModel { static_cast<SvdNode*>(index.internalPointer()), this });
+        TreeView(const QModelIndex& index) {
+            setModel(new SvdModel{static_cast<SvdNode*>(index.internalPointer()), this});
             header()->setSectionResizeMode(QHeaderView::Stretch);
             header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
             setAlternatingRowColors(true);
@@ -91,12 +88,11 @@ void MainWindow::doubleClicked(const QModelIndex& index)
         }
         void closeEvent(QCloseEvent* event) { deleteLater(); }
     };
-    if (index.data().toString() == "peripheral")
+    if(index.data().toString() == u"peripheral")
         new TreeView(index);
 }
 
-void MainWindow::parse()
-{
+void MainWindow::parse() {
     delete ui->treeView->model();
     peripherals.clear();
     //    if (QFile::exists(ui->lePdfPath->text())) {
@@ -117,20 +113,21 @@ void MainWindow::parse()
     //        //        //        setWindowTitle(pdf_path);
     //        //        QString pdf_path = dir.relativeFilePath(ui->lePdfPath->text());
 
-    //        //        m_communicator = new Communicator(this);
-    //        //        m_communicator->setUrl(pdf_path);
+    //        //        communicator_ = new Communicator(this);
+    //        //        communicator_->setUrl(pdf_path);
 
-    //        //        //ui->m_webView = new QWebEngineView(this);
+    //        //        //ui->webView_ = new QWebEngineView(this);
 
     //        //        QWebChannel* channel = new QWebChannel(this);
-    //        //        channel->registerObject(QStringLiteral("communicator"), m_communicator);
-    //        //        ui->m_webView->page()->setWebChannel(channel);
+    //        //        channel->registerObject(QStringLiteral("communicator"), communicator_);
+    //        //        ui->webView_->page()->setWebChannel(channel);
 
-    //        //        ui->m_webView->load(url);
-    //        //        //        setCentralWidget(m_webView);
+    //        //        ui->webView_->load(url);
+    //        //        //        setCentralWidget(webView_);
     //    }
-    if (QFile::exists(ui->lePath->text())) {
-        ui->treeView->setModel(new SvdModel { SvdParser(ui->lePath->text(), peripherals), ui->treeView });
+    if(QFile::exists(ui->lePath->text())) {
+        ui->treeView->setModel(
+            new SvdModel{SvdParser(ui->lePath->text(), peripherals), ui->treeView});
         ui->treeView->header()->setSectionResizeMode(QHeaderView::Stretch);
         ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
         peripherals.generate(ui->textEdit);

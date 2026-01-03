@@ -1,20 +1,18 @@
-#ifndef Communicator_H
-#define Communicator_H
+#pragma once
 
 #include <QObject>
 
-class Communicator : public QObject {
-	Q_OBJECT
-	Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
-	QString m_url;
-public:
-	explicit Communicator(QObject * p = nullptr) : QObject(p) {}
+class Communicator final : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
+    QString url_;
 
-	QString url() const { return m_url; }
-	void setUrl(const QString &url);
+public:
+    using QObject::QObject;
+
+    QString url() const { return url_; }
+    void setUrl(const QString& url);
 
 signals:
-	void urlChanged(const QString &);
+    void urlChanged(const QString&);
 };
-
-#endif
