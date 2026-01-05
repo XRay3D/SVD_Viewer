@@ -57,17 +57,19 @@ QT_BEGIN_NAMESPACE
 class QTextDocument;
 QT_END_NAMESPACE
 
-class CppHighlighter final : public QSyntaxHighlighter {
+class CppHighlighter final : public QSyntaxHighlighter
+{
     Q_OBJECT
 
 public:
-    CppHighlighter(QTextDocument* parent = 0);
+    CppHighlighter(QTextDocument *parent = 0);
 
 protected:
-    void highlightBlock(const QString& text) override;
+    void highlightBlock(const QString &text) override;
 
 private:
-    struct HighlightingRule {
+    struct HighlightingRule
+    {
         QRegularExpression pattern;
         QTextCharFormat format;
     };

@@ -14,55 +14,64 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0">
+      <item>
+       <widget class="QLineEdit" name="lePath"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbOpen">
+        <property name="text">
+         <string>Open</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item>
      <widget class="QSplitter" name="splitter">
       <property name="orientation">
        <enum>Qt::Orientation::Horizontal</enum>
       </property>
-      <widget class="QWidget" name="">
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QLineEdit" name="lePath"/>
-        </item>
-        <item>
-         <widget class="QTreeView" name="treeView">
-          <property name="alternatingRowColors">
-           <bool>true</bool>
-          </property>
-          <property name="selectionMode">
-           <enum>QAbstractItemView::SelectionMode::ContiguousSelection</enum>
-          </property>
-          <property name="textElideMode">
-           <enum>Qt::TextElideMode::ElideMiddle</enum>
-          </property>
-          <property name="horizontalScrollMode">
-           <enum>QAbstractItemView::ScrollMode::ScrollPerItem</enum>
-          </property>
-          <property name="animated">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <widget class="QTreeView" name="treeView">
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SelectionMode::ContiguousSelection</enum>
+       </property>
+       <property name="textElideMode">
+        <enum>Qt::TextElideMode::ElideMiddle</enum>
+       </property>
+       <property name="horizontalScrollMode">
+        <enum>QAbstractItemView::ScrollMode::ScrollPerItem</enum>
+       </property>
+       <property name="animated">
+        <bool>true</bool>
+       </property>
       </widget>
-      <widget class="QWidget" name="">
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="QPushButton" name="pbOpen">
-          <property name="text">
-           <string>Open</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTextEdit" name="textEdit">
-          <property name="lineWrapMode">
-           <enum>QTextEdit::LineWrapMode::NoWrap</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <widget class="QTreeView" name="treeView_2">
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SelectionMode::ContiguousSelection</enum>
+       </property>
+       <property name="textElideMode">
+        <enum>Qt::TextElideMode::ElideMiddle</enum>
+       </property>
+       <property name="horizontalScrollMode">
+        <enum>QAbstractItemView::ScrollMode::ScrollPerItem</enum>
+       </property>
+       <property name="animated">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="lineWrapMode">
+        <enum>QTextEdit::LineWrapMode::NoWrap</enum>
+       </property>
       </widget>
      </widget>
     </item>
@@ -74,7 +83,7 @@
      <x>0</x>
      <y>0</y>
      <width>1225</width>
-     <height>27</height>
+     <height>31</height>
     </rect>
    </property>
   </widget>

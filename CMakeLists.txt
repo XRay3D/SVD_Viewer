@@ -13,6 +13,24 @@ set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+include(FetchContent)
+FetchContent_Declare(
+  xrxml
+  GIT_REPOSITORY
+    git@github.com:XRay3D/XRXml.git # ${CMAKE_CURRENT_LIST_DIR}/../XRXml
+  GIT_TAG master)
+FetchContent_MakeAvailable(xrxml)
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  add_compile_options(-ftime-trace -fexpansion-statements -freflection-latest
+                      -stdlib=libc++)
+  add_link_options(-fuse-ld=lld -lc++ -lc++abi)
+  add_definitions(-DCR=1)
+else()
+  add_definitions(-DGR=1 -D__glibcxx_reflection=202506L)
+  add_compile_options(-freflection -stdlib=libc++)
+endif()
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/bin)
 
 include_directories(${Boost_INCLUDE_DIRS})
@@ -22,11 +40,16 @@ find_package(
   COMPONENTS Widgets Xml
   REQUIRED)
 
-file(GLOB PROJECT_SOURCES *.cpp *.h *.ui)
+file(GLOB PROJECT_SOURCES *.cpp *.h *.hpp *.ui)
 
 list(FILTER PROJECT_SOURCES EXCLUDE REGEX .*acropdf.*)
 
-qt_add_executable(SVD_Viewer MANUAL_FINALIZATION ${PROJECT_SOURCES})
+file(GLOB SVD_SOURCES svd/*.hpp svd/*.h svd/*.cpp)
+
+qt_add_executable(SVD_Viewer MANUAL_FINALIZATION ${PROJECT_SOURCES}
+                  ${SVD_SOURCES})
+
+target_include_directories(SVD_Viewer PRIVATE svd)
 
 target_compile_definitions(
   SVD_Viewer
@@ -41,7 +64,7 @@ target_compile_definitions(
           QCUSTOMPLOT_USE_OPENGL=1
           EMULATOR=1)
 
-target_link_libraries(SVD_Viewer PRIVATE Qt6::Widgets Qt6::Xml)
+target_link_libraries(SVD_Viewer PRIVATE Qt6::Widgets Qt6::Xml XR::Xml)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1. If
 # you are developing for iOS or macOS you should consider setting an explicit,

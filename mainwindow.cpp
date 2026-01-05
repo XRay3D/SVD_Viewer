@@ -2,9 +2,14 @@
 #include "cpphighlighter.h"
 #include "svdmodel.h"
 #include "ui_mainwindow.h"
+
 #include <QClipboard>
 #include <QSettings>
 #include <QShortcut>
+
+#include "Types.h"
+#include "tree.h"
+#include "xrxmlser.hpp"
 // #include "acropdf.h"
 // #include "communicator.h"
 // #include <QWebChannel>
@@ -58,6 +63,8 @@ void MainWindow::loadSettings() {
     restoreState(settings.value("State").toByteArray());
     ui->lePath->setText(settings.value("lePath", fileName).toString());
     ui->splitter->restoreState(settings.value("splitter").toByteArray());
+    ui->treeView->header()->restoreState(settings.value("treeView").toByteArray());
+    ui->treeView_2->header()->restoreState(settings.value("treeView_2").toByteArray());
     //    ui->lePdfPath->setText(settings.value("lePdfPath", fileName).toString());
 }
 
@@ -66,8 +73,10 @@ void MainWindow::saveSettings() {
     settings.beginGroup("MainWindow");
     settings.setValue("Geometry", saveGeometry());
     settings.setValue("State", saveState());
-    settings.setValue("splitter", ui->splitter->saveState());
     settings.setValue("lePath", ui->lePath->text());
+    settings.setValue("splitter", ui->splitter->saveState());
+    settings.setValue("treeView", ui->treeView->header()->saveState());
+    settings.setValue("treeView_2", ui->treeView_2->header()->saveState());
     //    settings.setValue("lePdfPath", ui->lePdfPath->text());
 }
 
@@ -95,42 +104,21 @@ void MainWindow::doubleClicked(const QModelIndex& index) {
 void MainWindow::parse() {
     delete ui->treeView->model();
     peripherals.clear();
-    //    if (QFile::exists(ui->lePdfPath->text())) {
-    //        auto AcroPDF = new AcroPDFLib::AcroPDF(this);
-    //        ui->gridLayout->addWidget(AcroPDF, 1, 2);
-    //        qDebug() << "LoadFile" << AcroPDF->LoadFile(ui->lePdfPath->text());
-    //        //        QString app_path = qApp->applicationDirPath();
-    //        //#ifdef Q_OS_MACOS
-    //        //        QDir app_path_dir(app_path);
-    //        //        app_path_dir.cdUp();
-    //        //        app_path_dir.cdUp();
-    //        //        app_path_dir.cdUp();
-    //        //        app_path = app_path_dir.absolutePath();
-    //        //#endif
-    //        //        auto url = QUrl::fromLocalFile(app_path + "/minified/web/viewer.html");
-
-    //        //        QDir dir(app_path + "/minified/web/");
-    //        //        //        setWindowTitle(pdf_path);
-    //        //        QString pdf_path = dir.relativeFilePath(ui->lePdfPath->text());
-
-    //        //        communicator_ = new Communicator(this);
-    //        //        communicator_->setUrl(pdf_path);
-
-    //        //        //ui->webView_ = new QWebEngineView(this);
-
-    //        //        QWebChannel* channel = new QWebChannel(this);
-    //        //        channel->registerObject(QStringLiteral("communicator"), communicator_);
-    //        //        ui->webView_->page()->setWebChannel(channel);
-
-    //        //        ui->webView_->load(url);
-    //        //        //        setCentralWidget(webView_);
-    //    }
     if(QFile::exists(ui->lePath->text())) {
-        ui->treeView->setModel(
-            new SvdModel{SvdParser(ui->lePath->text(), peripherals), ui->treeView});
+        ui->treeView->setModel(new SvdModel{SvdParser(ui->lePath->text(), peripherals), ui->treeView});
         ui->treeView->header()->setSectionResizeMode(QHeaderView::Stretch);
         ui->treeView->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
         peripherals.generate(ui->textEdit);
         ui->textEdit->moveCursor(QTextCursor::Start);
     }
+
+    static Generated::Device device{};
+    XML::Serializer(ui->lePath->text().toUtf8()) >> device;
+
+    ui->treeView_2->setModel(new TreeModel{(new Item{device, new TreeItem})->parent(), ui->treeView});
+
+    ui->treeView->expandAll();
+    ui->treeView->header()->sectionResizeMode(QHeaderView::ResizeToContents);
+    ui->treeView_2->expandAll();
+    ui->treeView_2->header()->sectionResizeMode(QHeaderView::ResizeToContents);
 }

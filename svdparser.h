@@ -5,13 +5,14 @@
 class Peripherals;
 class QDomNode;
 
-class SvdParser {
-    SvdNode* node_{};
-    void nextNode(SvdNode* const svdNodeParent, QDomNode& domNode);
-    Peripherals& peripherals;
+class SvdParser
+{
+    SvdNode *node_{};
+    void nextNode(SvdNode *const svdNodeParent, QDomNode &domNode);
+    Peripherals &peripherals;
     bool isPeripheral{};
 
 public:
-    SvdParser(const QString& fileName, Peripherals& peripherals);
-    operator SvdNode*() const { return node_; }
+    SvdParser(const QString &fileName, Peripherals &peripherals);
+    operator SvdNode *() const { return node_; }
 };

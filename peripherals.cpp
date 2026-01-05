@@ -8,24 +8,27 @@
 
 namespace rng = std::ranges;
 
-Peripherals::Peripherals() { }
+Peripherals::Peripherals() {}
 
-void Peripherals::clear() {
+void Peripherals::clear()
+{
     peripherals.clear();
     peripherals.reserve(1000);
 }
 
 #if 1
 
-void Peripherals::generate(QTextEdit* textEdit) const { }
+void Peripherals::generate(QTextEdit *textEdit) const {}
 
 #else
 
-Peripheral& Peripherals::current() {
+Peripheral &Peripherals::current()
+{
     return peripherals.back();
 }
 
-void Peripherals::generate(QTextEdit* textEdit) const {
+void Peripherals::generate(QTextEdit *textEdit) const
+{
     QByteArray str;
     str.reserve(1000000);
     //    str.append("#pragma once\n"
@@ -233,8 +236,8 @@ void Peripherals::generate(QTextEdit* textEdit) const {
     //    };
 
     //    rng::for_each(peripherals, addPeripheral);
-    for(auto&& val: peripherals) {
-        if(val.name.startsWith("DMA")) {
+    for (auto &&val : peripherals) {
+        if (val.name.startsWith("DMA")) {
             generateDma(str, val, textEdit);
             // break;
         }
@@ -243,13 +246,14 @@ void Peripherals::generate(QTextEdit* textEdit) const {
     QFile file{uR"(D:\ARM\NucleoL476_Nokia1616_LCD\Core\Src\_DMA.h)"_s};
     // QFile file { R"(C:\Users\bakiev\Junk_Yard\PRO\ARM\NucleoL476_Nokia1//616_LCD\Core\Src\_DMA.h)" };
     str.replace('\t', "    ");
-    if(file.open(QFile::WriteOnly))
+    if (file.open(QFile::WriteOnly))
         file.write(str);
     textEdit->setText(QString::fromUtf8(str));
 }
 
-void Peripherals::generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit* textEdit) const {
-    if(str.isEmpty()) {
+void Peripherals::generateDma(QByteArray &str, Peripheral &peripheral, QTextEdit *textEdit) const
+{
+    if (str.isEmpty()) {
         str.reserve(1000000);
         str.append("#pragma once\n"
                    "#include <stdint.h>\n"
@@ -307,14 +311,14 @@ void Peripherals::generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit
     };
     int access{ReadWrite};
 
-    auto MASK = [](Field& field) -> QByteArray {
+    auto MASK = [](Field &field) -> QByteArray {
         QByteArray mask;
         mask.reserve(40);
         mask.append("0b");
-        for(int i{}; i < 32; ++i) {
+        for (int i{}; i < 32; ++i) {
             auto bitOffset{field.bitOffset.toUInt()};
             auto bitWidth{field.bitWidth.toUInt()};
-            if(bitOffset <= i && i < bitOffset + bitWidth)
+            if (bitOffset <= i && i < bitOffset + bitWidth)
                 mask.append('1');
             else
                 mask.append('0');
@@ -323,34 +327,34 @@ void Peripherals::generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit
         return mask;
     };
 
-    auto addField = [&](Field& field) {
-        if(int dummu = field.bitOffset.toUInt() - bitWidth; dummu) {
+    auto addField = [&](Field &field) {
+        if (int dummu = field.bitOffset.toUInt() - bitWidth; dummu) {
             STR_APPEND("\t\tunsigned : {};// Reserved / Unused\n", dummu);
             bitWidth += dummu;
         }
         STR_APPEND("\t\t\tunsigned {0}: {1}; // bitOffset {2}\n",
-            field.name,
-            field.bitWidth,
-            field.bitOffset + " " + field.description);
+                   field.name,
+                   field.bitWidth,
+                   field.bitOffset + " " + field.description);
         bitWidth += field.bitWidth.toUInt();
     };
 
-    auto fieldRead = [&](Field& field) {
+    auto fieldRead = [&](Field &field) {
         STR_APPEND("        /** @brief {} */\n", field.description);
         //        STR_APPEND("        auto {0}() const {{ return U.{0}; }}\n", field.name);
         STR_APPEND("        auto {0}() const {{ return BIT_BAND_PER(U.U32, 1 << {1}); }}\n",
-            field.name,
-            field.bitOffset);
+                   field.name,
+                   field.bitOffset);
     };
 
-    auto fieldWrite = [&](Field& field) {
+    auto fieldWrite = [&](Field &field) {
         STR_APPEND("        /** @brief {} */\n", field.description);
-        if(field.bitWidth == "1")
+        if (field.bitWidth == "1")
             STR_APPEND("        void {0}() volatile {{ U.{0} = 1; }}\n", field.name);
     };
 
-    auto ieldReadWrite = [&](Field& field) {
-        if(field.bitWidth == "1") {
+    auto ieldReadWrite = [&](Field &field) {
+        if (field.bitWidth == "1") {
             STR_APPEND("        /** @brief {} */\n", field.description);
             STR_APPEND("        auto {0}() const {{ return U.{0}; }}\n", field.name);
             STR_APPEND("        /** @brief {} */\n", field.description);
@@ -364,33 +368,33 @@ void Peripherals::generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit
             STR_APPEND("        /** @brief {} */\n", field.description);
             STR_APPEND("        void {0}(uint32_t val) volatile {{ U.U32 = (U.U32 & ~{1}) | (val "
                        "<< {2}); }}\n",
-                field.name,
-                MASK(field),
-                field.bitOffset);
+                       field.name,
+                       MASK(field),
+                       field.bitOffset);
             STR_APPEND("        void {0}(uint32_t&& val) volatile {{ U.U32 = (U.U32 & ~{1}) | (val "
                        "<< {2}); }}\n",
-                field.name,
-                MASK(field),
-                field.bitOffset);
+                       field.name,
+                       MASK(field),
+                       field.bitOffset);
         }
     };
 
 #define MODIFY_REG(REG, CLEARMASK, SETMASK) \
     WRITE_REG((REG), (((READ_REG(REG)) & (~(CLEARMASK))) | (SETMASK)))
 
-    auto addRegisters = [&](Register& reg) {
-        if(reg.access == "read-only")
+    auto addRegisters = [&](Register &reg) {
+        if (reg.access == "read-only")
             access = ReadOnly;
-        else if(reg.access == "write-only")
+        else if (reg.access == "write-only")
             access = WriteOnly;
         else
             access = ReadWrite;
 
-        rng::sort(reg.fields, {}, [](auto& arg) { return arg.bitOffset.toUInt(); });
+        rng::sort(reg.fields, {}, [](auto &arg) { return arg.bitOffset.toUInt(); });
 
-        if(reg.fields.size() > 1
+        if (reg.fields.size() > 1
             || (reg.fields.size() == 1 && reg.fields.back().bitWidth != "32")) {
-            switch(access) {
+            switch (access) {
             case ReadOnly:
             case WriteOnly:
                 STR_APPEND("    class alignas(4) {0}_ {{ // {1}\n", reg.name, reg.description);
@@ -419,7 +423,7 @@ void Peripherals::generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit
             str.append("    public:\n");
             //            }
 
-            switch(access) {
+            switch (access) {
             case ReadOnly:
                 str.append("        auto U32() const { return U.U32; }\n");
                 rng::for_each(reg.fields, fieldRead);
@@ -441,11 +445,11 @@ void Peripherals::generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit
         }
     };
 
-    auto addPeripheral = [&](Peripheral& val) {
+    auto addPeripheral = [&](Peripheral &val) {
         STR_APPEND("// description {}\n", val.description);
         STR_APPEND("struct {}_ {{\n", val.groupName);
 
-        rng::sort(val.registers, {}, [](auto& arg) {
+        rng::sort(val.registers, {}, [](auto &arg) {
             return arg.addressOffset.mid(2).toUInt(nullptr, 16);
         });
 
@@ -453,9 +457,9 @@ void Peripherals::generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit
 
         str.append('\n');
         int baseAddress{};
-        rng::for_each(val.registers, [&](Register& reg) {
+        rng::for_each(val.registers, [&](Register &reg) {
             //        APPEND("\t{0}_ {0};//{1}\n", reg.name, reg.addressOffset);
-            if(int dummu = reg.addressOffset.mid(2).toUInt(nullptr, 16) - baseAddress; dummu) {
+            if (int dummu = reg.addressOffset.mid(2).toUInt(nullptr, 16) - baseAddress; dummu) {
                 STR_APPEND("\tuint32_t padding{}[{}];\n", baseAddress, dummu / 4);
                 baseAddress += dummu;
             }
@@ -466,18 +470,18 @@ void Peripherals::generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit
 
         str.append("};\n\n");
     };
-    if(!peripheral.peripheral)
+    if (!peripheral.peripheral)
         addPeripheral(peripheral);
 
     STR_APPEND("inline volatile {2}_ _{0} = *reinterpret_cast<{2}_*>({1});\n",
-        peripheral.name,
-        peripheral.baseAddress,
-        peripheral.peripheral ? peripheral.peripheral->groupName : peripheral.groupName);
+               peripheral.name,
+               peripheral.baseAddress,
+               peripheral.peripheral ? peripheral.peripheral->groupName : peripheral.groupName);
 
     QFile file{uR"(D:\ARM\NucleoL476_Nokia1616_LCD\Core\Src\_DMA.h)"_s};
     // QFile file { R"(C:\Users\bakiev\Junk_Yard\PRO\ARM\NucleoL476_Nokia1//616_LCD\Core\Src\_DMA.h)" };
     str.replace('\t', "    ");
-    if(file.open(QFile::WriteOnly))
+    if (file.open(QFile::WriteOnly))
         file.write(str);
     textEdit->setText(QString::fromUtf8(str));
 }

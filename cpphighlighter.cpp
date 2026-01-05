@@ -52,48 +52,29 @@
 
 using namespace Qt::Literals;
 
-inline QRegularExpression operator""_re(const char16_t* str, size_t size) noexcept {
-    return QRegularExpression(QString(QStringPrivate(nullptr, const_cast<char16_t*>(str), qsizetype(size))));
+inline QRegularExpression operator""_re(const char16_t *str, size_t size) noexcept
+{
+    return QRegularExpression(
+        QString(QStringPrivate(nullptr, const_cast<char16_t *>(str), qsizetype(size))));
 }
 
-CppHighlighter::CppHighlighter(QTextDocument* parent)
-    : QSyntaxHighlighter(parent) {
+CppHighlighter::CppHighlighter(QTextDocument *parent)
+    : QSyntaxHighlighter(parent)
+{
     QStringList keywordPatterns{
-        uR"(\bchar\b)"_s,
-        uR"(\bclass\b)"_s,
-        uR"(\bconst\b)"_s,
-        uR"(\bdouble\b)"_s,
-        uR"(\benum\b)"_s,
-        uR"(\bexplicit\b)"_s,
-        uR"(\bfriend\b)"_s,
-        uR"(\binline\b)"_s,
-        uR"(\bint\b)"_s,
-        uR"(\blong\b)"_s,
-        uR"(\bnamespace\b)"_s,
-        uR"(\boperator\b)"_s,
-        uR"(\bprivate\b)"_s,
-        uR"(\bprotected\b)"_s,
-        uR"(\bpublic\b)"_s,
-        uR"(\bshort\b)"_s,
-        uR"(\bsignals\b)"_s,
-        uR"(\bsigned\b)"_s,
-        uR"(\bslots\b)"_s,
-        uR"(\bstatic\b)"_s,
-        uR"(\bstruct\b)"_s,
-        uR"(\btemplate\b)"_s,
-        uR"(\btypedef\b)"_s,
-        uR"(\btypename\b)"_s,
-        uR"(\bunion\b)"_s,
-        uR"(\bunsigned\b)"_s,
-        uR"(\bvirtual\b)"_s,
-        uR"(\bvoid\b)"_s,
-        uR"(\bvolatile\b)"_s,
-        uR"(\bbool\b)"_s,
+        uR"(\bchar\b)"_s,     uR"(\bclass\b)"_s,     uR"(\bconst\b)"_s,     uR"(\bdouble\b)"_s,
+        uR"(\benum\b)"_s,     uR"(\bexplicit\b)"_s,  uR"(\bfriend\b)"_s,    uR"(\binline\b)"_s,
+        uR"(\bint\b)"_s,      uR"(\blong\b)"_s,      uR"(\bnamespace\b)"_s, uR"(\boperator\b)"_s,
+        uR"(\bprivate\b)"_s,  uR"(\bprotected\b)"_s, uR"(\bpublic\b)"_s,    uR"(\bshort\b)"_s,
+        uR"(\bsignals\b)"_s,  uR"(\bsigned\b)"_s,    uR"(\bslots\b)"_s,     uR"(\bstatic\b)"_s,
+        uR"(\bstruct\b)"_s,   uR"(\btemplate\b)"_s,  uR"(\btypedef\b)"_s,   uR"(\btypename\b)"_s,
+        uR"(\bunion\b)"_s,    uR"(\bunsigned\b)"_s,  uR"(\bvirtual\b)"_s,   uR"(\bvoid\b)"_s,
+        uR"(\bvolatile\b)"_s, uR"(\bbool\b)"_s,
     };
 
     using RE = QRegularExpression;
     keywordFormat.setForeground(Qt::darkBlue);
-    for(const auto& pattern: keywordPatterns) {
+    for (const auto &pattern : keywordPatterns) {
         highlightingRules.emplace_back(RE(pattern), keywordFormat);
     }
     {
@@ -119,10 +100,11 @@ CppHighlighter::CppHighlighter(QTextDocument* parent)
     }
 }
 
-void CppHighlighter::highlightBlock(const QString& text) {
-    for(auto&& rule: highlightingRules) {
+void CppHighlighter::highlightBlock(const QString &text)
+{
+    for (auto &&rule : highlightingRules) {
         QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
-        while(matchIterator.hasNext()) {
+        while (matchIterator.hasNext()) {
             QRegularExpressionMatch match = matchIterator.next();
             setFormat(match.capturedStart(), match.capturedLength(), rule.format);
         }
@@ -131,14 +113,14 @@ void CppHighlighter::highlightBlock(const QString& text) {
     setCurrentBlockState(0);
 
     int startIndex = 0;
-    if(previousBlockState() != 1)
+    if (previousBlockState() != 1)
         startIndex = text.indexOf(commentStartExpression);
 
-    while(startIndex >= 0) {
+    while (startIndex >= 0) {
         QRegularExpressionMatch match = commentEndExpression.match(text, startIndex);
         int endIndex = match.capturedStart();
         int commentLength = 0;
-        if(endIndex == -1) {
+        if (endIndex == -1) {
             setCurrentBlockState(1);
             commentLength = text.length() - startIndex;
         } else {

@@ -8,19 +8,22 @@ using namespace Qt::Literals;
 
 class QTextEdit;
 
-struct Field {
+struct Field
+{
     QByteArray name;
     QByteArray description;
     QByteArray bitOffset;
     QByteArray bitWidth;
 };
-struct Interrupt {
+struct Interrupt
+{
     QByteArray name;
     QByteArray description;
     QByteArray value;
 };
 
-struct Register {
+struct Register
+{
     QByteArray name;
     QByteArray displayName;
     QByteArray description;
@@ -31,8 +34,9 @@ struct Register {
     std::vector<Field> fields;
 };
 
-struct Peripheral {
-    Peripheral* peripheral{};
+struct Peripheral
+{
+    Peripheral *peripheral{};
     QByteArray name;
     QByteArray description;
     QByteArray groupName;
@@ -41,16 +45,17 @@ struct Peripheral {
     std::vector<Interrupt> interrupts;
 };
 
-struct Peripherals {
+struct Peripherals
+{
     mutable std::vector<Peripheral> peripherals;
-    mutable std::map<QString, Peripheral*> peripheralsMap;
-    mutable std::map<QString, std::vector<Peripheral*>> groupMap;
+    mutable std::map<QString, Peripheral *> peripheralsMap;
+    mutable std::map<QString, std::vector<Peripheral *>> groupMap;
     Peripherals();
     void clear();
-    Peripheral& current();
-    void generate(QTextEdit* textEdit) const;
+    Peripheral &current();
+    void generate(QTextEdit *textEdit) const;
     operator bool() const { return peripherals.size(); }
 
 private:
-    void generateDma(QByteArray& str, Peripheral& peripheral, QTextEdit* textEdit) const;
+    void generateDma(QByteArray &str, Peripheral &peripheral, QTextEdit *textEdit) const;
 };
