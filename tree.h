@@ -106,7 +106,9 @@ protected:
     template <XML::IsClass Ty> void createChild(Ty& arg) {
         // data_[FieldName] = TYPE_NAME<T>;
         template for(constexpr auto FIELD: members(^^Ty)) {
-            if constexpr(display_string_of(FIELD) == "name" | display_string_of(FIELD) == "description")
+            if constexpr(
+                (display_string_of(FIELD) == "name"sv && requires { data_[Value] = arg.[:FIELD:]; })
+                || display_string_of(FIELD) == "description"sv)
                 continue; // Пропуск, отображаются в родительском элементе.
             if constexpr(IsOptional<decltype(arg.[:FIELD:])>) {
                 if(arg.[:FIELD:]) {
@@ -172,7 +174,9 @@ struct Item : TreeItem {
                     return val;
                 } else if constexpr(IsVector<T>) {
                     return static_cast<int>(val.size());
-                } else if constexpr(std::is_arithmetic_v<T>) {
+                } else if constexpr(XML::IsFloating<T> || std::is_same_v<T, bool>) {
+                    return val;
+                } else if constexpr(XML::IsIntegral<T>) {
                     return "0x"_ba += QByteArray::number(val, 16) + " (" + QByteArray::number(val) + ')';
                 } else if constexpr(std::is_enum_v<T>) {
                     auto sv = XML::toString(val);

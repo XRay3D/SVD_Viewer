@@ -1,14 +1,8 @@
 #pragma once
 
-#include "Enums.h"
-#include "xrxmlser.hpp"
-#include <optional>
-#include <stdexcept>
-#include <string>
-#include <variant>
-#include <vector>
+#include "enums.h"
 
-namespace Generated {
+namespace CmsisSvd {
 
 struct[[= XML::Name("R")]] Range {
     uint32_t minimum;
@@ -16,15 +10,12 @@ struct[[= XML::Name("R")]] Range {
 };
 
 // writeContraintType specifies how to describe the restriction of the allowed values that can be written to a resource
-struct[[= XML::Name("writeConstraint")]] WriteConstraint {
+struct[[= XML::Name("writeConstraint")]] Writeconstraint {
     // std::variant<bool, bool, Range> writeAsRead_useEnumeratedValues_range_;
-    std::optional<bool> writeAsRead;
-    std::optional<bool> useEnumeratedValues;
-    std::optional<Range> range;
 };
 
 // addressBlockType specifies the elements to describe an address block
-struct[[= XML::Name("addressBlock")]] AddressBlock {
+struct[[= XML::Name("addressBlock")]] Addressblock {
     uint32_t offset;
     uint32_t size;
     std::string usage;
@@ -44,15 +35,25 @@ struct[[= XML::Name("Re")]] Region {
     uint32_t base;
     uint32_t limit;
     std::string access;
+    //
+    // [По умолчанию: true]
+    [[= XML::Attr]] std::optional<bool> enabled;
+    [[= XML::Attr]] std::optional<std::string> name;
 };
 
-struct[[= XML::Name("SauRegionsCo")]] SauRegionsConfig {
-    [[= XML::Array]] std::vector<Region> region;
+struct[[= XML::Name("Sauregionsco")]] Sauregionsconfig {
+    [[= XML::Elem]] std::vector<Region> region;
+    //
+    // [По умолчанию: true]
+    [[= XML::Attr]] std::optional<bool> enabled;
+    //
+    // [По умолчанию: s]
+    [[= XML::Attr]] std::optional<std::string> protectionWhenDisabled;
 };
 
 struct[[= XML::Name("cpu")]] Cpu {
     // V1.1: ARM processor name: Cortex-Mx / SCxxx
-    CpuName name;
+    Cpuname name;
     // V1.1: ARM defined revision of the cpu
     std::string revision;
     // V1.1: Endian specifies the endianess of the processor/device
@@ -73,24 +74,24 @@ struct[[= XML::Name("cpu")]] Cpu {
     std::optional<bool> itcmPresent;
     // V1.2: dtcmPresent specifies that an data tightly coupled memory is physically present
     std::optional<bool> dtcmPresent;
-    // V1.1: vtorPresent is used for Cortex-M0+ based devices only. It indicates whether the Vector        Table Offset Register is implemented in the device or not
+    // V1.1: vtorPresent is used for Cortex-M0+ based devices only. It indicates whether the VectorTable Offset Register is implemented in the device or not
     std::optional<bool> vtorPresent;
-    // V1.1: nvicPrioBits specifies the number of bits used by the Nested Vectored Interrupt Controller        for defining the priority level = # priority levels
+    // V1.1: nvicPrioBits specifies the number of bits used by the Nested Vectored Interrupt Controllerfor defining the priority level = # priority levels
     uint32_t nvicPrioBits;
-    // V1.1: vendorSystickConfig is set true if a custom system timer is implemented in the device        instead of the ARM specified SysTickTimer
+    // V1.1: vendorSystickConfig is set true if a custom system timer is implemented in the deviceinstead of the ARM specified SysTickTimer
     bool vendorSystickConfig;
     // V1.3: reports the total number of interrupts implemented by the device (optional)
     std::optional<uint32_t> deviceNumInterrupts;
     // V1.3: indicates whether a PMU is present and how many event counter are present
     std::optional<bool> pmuPresent;
     std::optional<uint32_t> pmuNumEventCnt;
-    // V1.3: sauRegions specifies the available number of address regions        if not specified a value of zero is assumed
+    // V1.3: sauRegions specifies the available number of address regionsif not specified a value of zero is assumed
     std::optional<uint32_t> sauNumRegions;
     // V1.3: SAU Regions Configuration (if fully or partially predefined)
-    std::optional<SauRegionsConfig> sauRegionsConfig;
+    std::optional<Sauregionsconfig> sauRegionsConfig;
 };
 
-struct[[= XML::Name("enumeratedValue")]] EnumeratedValue {
+struct[[= XML::Name("enumeratedValue")]] Enumeratedvalue {
     // name is a ANSI C indentifier representing the value (C Enumeration)
     std::string name;
     // description contains the details about the semantics/behavior specified by this value
@@ -98,8 +99,6 @@ struct[[= XML::Name("enumeratedValue")]] EnumeratedValue {
     // isDefault specifies the name and description for all values that are not
     // specifically described individually
     // std::variant<std::string, bool> value_isDefault_;
-    std::optional<std::string> value;
-    std::optional<bool> isDefault;
 };
 
 struct[[= XML::Name("enumeration")]] Enumeration {
@@ -110,22 +109,23 @@ struct[[= XML::Name("enumeration")]] Enumeration {
     std::optional<std::string> headerEnumName;
     // usage specifies whether this enumeration is to be used for read or write or
     // (read and write) accesses
-    std::optional<EnumUsage> usage;
+    std::optional<Enumusage> usage;
     // enumeratedValues derivedFrom=<referenceIdentifierType>
-    [[= XML::Array]] std::vector<EnumeratedValue> enumeratedValue;
+    [[= XML::Elem]] std::vector<Enumeratedvalue> enumeratedValue;
+    [[= XML::Attr]] std::optional<std::string> derivedFrom;
 };
 
-struct[[= XML::Name("dimArrayIndex")]] DimArrayIndex {
+struct[[= XML::Name("dimArrayIndex")]] Dimarrayindex {
     std::optional<std::string> headerEnumName;
-    [[= XML::Array]] std::vector<EnumeratedValue> enumeratedValue;
+    [[= XML::Elem]] std::vector<Enumeratedvalue> enumeratedValue;
 };
 
 struct[[= XML::Name("field")]] Field {
-    std::optional<uint32_t> dim;
-    std::optional<uint32_t> dimIncrement;
+    uint32_t dim;
+    uint32_t dimIncrement;
     std::optional<std::string> dimIndex;
     std::optional<std::string> dimName;
-    std::optional<DimArrayIndex> dimArrayIndex;
+    std::optional<Dimarrayindex> dimArrayIndex;
     // name specifies a field's name. The System Viewer and the device header file will
     // use the name of the field as identifier
     std::string name;
@@ -133,19 +133,18 @@ struct[[= XML::Name("field")]] Field {
     // options of a field
     std::optional<std::string> description;
     // bit field described by [<msb>:<lsb>]
-    std::optional<std::string> bitRange_;
-    std::optional<uint8_t> bitOffset;
-    std::optional<uint8_t> bitWidth;
+    // std::variant<std::string> bitRange_;
     // access describes the predefined permissions for the field.
     std::optional<Access> access;
     // predefined description of write side effects
-    std::optional<ModifiedWriteValues> modifiedWriteValues;
+    std::optional<Modifiedwritevalues> modifiedWriteValues;
     // writeContstraint specifies the subrange of allowed values
-    std::optional<WriteConstraint> writeConstraint;
+    std::optional<Writeconstraint> writeConstraint;
     // readAction specifies the read side effects.
-    std::optional<ReadAction> readAction;
+    std::optional<Readaction> readAction;
     // enumeratedValues derivedFrom=<identifierType>
-    [[= XML::Array]] std::vector<Enumeration> enumeratedValues;
+    [[= XML::Elem]] std::vector<Enumeration> enumeratedValues;
+    [[= XML::Attr]] std::optional<std::string> derivedFrom;
 };
 
 struct[[= XML::Name("fields")]] Fields {
@@ -158,7 +157,7 @@ struct[[= XML::Name("register")]] Register {
     uint32_t dimIncrement;
     std::optional<std::string> dimIndex;
     std::optional<std::string> dimName;
-    std::optional<DimArrayIndex> dimArrayIndex;
+    std::optional<Dimarrayindex> dimArrayIndex;
     // name specifies the name of the register. The register name is used by System Viewer and
     // device header file generator to represent a register
     std::string name;
@@ -182,15 +181,16 @@ struct[[= XML::Name("register")]] Register {
     std::optional<uint32_t> resetValue;
     std::optional<uint32_t> resetMask;
     // V1.1: dataType specifies a CMSIS compliant native dataType for a register (i.e. signed, unsigned, pointer)
-    std::optional<DataType> data;
+    std::optional<Datatype> data;
     // modifiedWriteValues specifies the write side effects
-    std::optional<ModifiedWriteValues> modifiedWriteValues;
+    std::optional<Modifiedwritevalues> modifiedWriteValues;
     // writeConstraint specifies the subset of allowed write values
-    std::optional<WriteConstraint> writeConstraint;
+    std::optional<Writeconstraint> writeConstraint;
     // readAcction specifies the read side effects
-    std::optional<ReadAction> readAction;
+    std::optional<Readaction> readAction;
     // fields section contains all fields that belong to this register
     std::optional<Fields> fields;
+    [[= XML::Attr]] std::optional<std::string> derivedFrom;
 };
 
 // V1.1: A cluster is a set of registers that are composed into a C data structure in the device header file
@@ -199,7 +199,7 @@ struct[[= XML::Name("cluster")]] Cluster {
     uint32_t dimIncrement;
     std::optional<std::string> dimIndex;
     std::optional<std::string> dimName;
-    std::optional<DimArrayIndex> dimArrayIndex;
+    std::optional<Dimarrayindex> dimArrayIndex;
     std::string name;
     std::string description;
     // V1.1: alternateCluster specifies an alternative description for a cluster address range that is
@@ -217,21 +217,22 @@ struct[[= XML::Name("cluster")]] Cluster {
     std::optional<uint32_t> resetMask;
     // 1.3: nesting of cluster is supported
     // std::variant<Register, Cluster> register__cluster_;
+    [[= XML::Attr]] std::optional<std::string> derivedFrom;
 };
 
 // the registers section can have an arbitrary list of cluster and register sections
 struct[[= XML::Name("registers")]] Registers {
-    std::variant<Cluster, Register> cluster_register__;
+    // std::variant<Cluster, Register> cluster_register__;
+    [[= XML::Elem]] std::vector<Register> peripheral;
+    [[= XML::Elem]] std::vector<Register> cluster;
 };
 
 struct[[= XML::Name("peripheral")]] Peripheral {
-   [[=XML::Attr]] std::optional<std::string> derivedFrom;
-
     uint32_t dim;
     uint32_t dimIncrement;
     std::optional<std::string> dimIndex;
     std::optional<std::string> dimName;
-    std::optional<DimArrayIndex> dimArrayIndex;
+    std::optional<Dimarrayindex> dimArrayIndex;
     // name specifies the name of a peripheral. This name is used for the System View and device header file
     std::string name;
     // version specifies the version of the peripheral descriptions
@@ -267,21 +268,21 @@ struct[[= XML::Name("peripheral")]] Peripheral {
     // addressBlock specifies one or more address ranges that are assigned exclusively to this peripheral.
     // derived peripherals may have no addressBlock, however none-derived peripherals are required to specify
     // at least one address block
-    [[= XML::Elem]] std::vector<AddressBlock> addressBlock;
+    [[= XML::Elem]] std::vector<Addressblock> addressBlock;
     // interrupt specifies can specify one or more interrtupts by name, description and value
-    [[= XML::Array]] std::vector<Interrupt> interrupt;
+    [[= XML::Elem]] std::vector<Interrupt> interrupt;
     // registers section contains all registers owned by the peripheral. In case a peripheral gets derived it does
     // not have its own registers section, hence this section is optional. A unique peripheral without a
     // registers section is not allowed
-    // std::optional<Registers> registers;
-    [[= XML::Array]] std::vector<Register> registers;
+    std::optional<Registers> registers;
+    [[= XML::Attr]] std::optional<std::string> derivedFrom;
 };
 
 struct[[= XML::Name("Periphe")]] Peripherals {
     [[= XML::Elem]] std::vector<Peripheral> peripheral;
 };
 
-struct[[= XML::Name("VendorExtens")]] VendorExtensions {
+struct[[= XML::Name("Vendorextens")]] Vendorextensions {
 };
 
 struct[[= XML::Root("device")]] Device {
@@ -323,9 +324,9 @@ struct[[= XML::Root("device")]] Device {
     std::optional<uint32_t> resetMask;
     // peripherals is containing all peripherals
     Peripherals peripherals;
-    // [[= XML::Array]] std::vector<Peripheral> peripherals;
     // Vendor Extensions: this section captures custom extensions. This section will be ignored by default
-    std::optional<VendorExtensions> vendorExtensions;
+    std::optional<Vendorextensions> vendorExtensions;
+    [[= XML::Attr]] double schemaVersion;
 };
 
-} // namespace Generated
+} // namespace CmsisSvd

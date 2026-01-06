@@ -4,12 +4,13 @@
 
 #include <QClipboard>
 #include <QFile>
+#include <QFileDialog>
 #include <QSettings>
 #include <QShortcut>
 #include <QSortFilterProxyModel>
 
-#include "Types.h"
 #include "tree.h"
+#include "types.h"
 #include "xrxmlser.hpp"
 
 class ProxyModel : public QSortFilterProxyModel {
@@ -91,7 +92,11 @@ MainWindow::MainWindow(QWidget* parent)
     QFontMetricsF metrics(ui->textEdit->font());
     ui->textEdit->setTabStopDistance(tabStop * metrics.averageCharWidth());
 
-    connect(ui->pbOpen, &QPushButton::clicked, this, &MainWindow::parse);
+    connect(ui->pbOpen, &QPushButton::clicked, this,
+        [this] {
+            ui->lePath->setText(QFileDialog::getOpenFileName(this, u"Open *.svd"_s, ui->lePath->text(), u"*.svd"_s));
+            parse();
+        });
     connect(ui->treeView, &QTreeView::doubleClicked, this, &MainWindow::doubleClicked);
 
     connect(ui->leQueryName, &QLineEdit::textChanged,
@@ -114,7 +119,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     loadSettings();
 
-    ui->pbOpen->click();
+    ui->lePath->text().isEmpty() ? ui->pbOpen->click() : parse();
+
     menuBar()->addAction(u"&Expand All"_s, ui->treeView, &QTreeView::expandAll);
 
     connect(new QShortcut(QKeySequence::Copy, this), &QShortcut::activated, [this] {
@@ -185,13 +191,13 @@ void MainWindow::doubleClicked(const QModelIndex& index) {
 
 void MainWindow::parse() {
     if(QFile::exists(ui->lePath->text())) {
-        static Generated::Device device{};
+        static CmsisSvd::Device device{};
         XML::Serializer(ui->lePath->text().toUtf8().data()) >> device;
 
         delete proxyModel->sourceModel();
         proxyModel->setSourceModel(new TreeModel{device, ui->treeView});
 
         ui->treeView->expandAll();
-        ui->treeView->header()->sectionResizeMode(QHeaderView::ResizeToContents);
+        // ui->treeView->header()->sectionResizeMode(QHeaderView::ResizeToContents);
     }
 }
