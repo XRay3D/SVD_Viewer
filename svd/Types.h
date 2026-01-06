@@ -18,6 +18,9 @@ struct[[= XML::Name("R")]] Range {
 // writeContraintType specifies how to describe the restriction of the allowed values that can be written to a resource
 struct[[= XML::Name("writeConstraint")]] WriteConstraint {
     // std::variant<bool, bool, Range> writeAsRead_useEnumeratedValues_range_;
+    std::optional<bool> writeAsRead;
+    std::optional<bool> useEnumeratedValues;
+    std::optional<Range> range;
 };
 
 // addressBlockType specifies the elements to describe an address block
@@ -95,6 +98,8 @@ struct[[= XML::Name("enumeratedValue")]] EnumeratedValue {
     // isDefault specifies the name and description for all values that are not
     // specifically described individually
     // std::variant<std::string, bool> value_isDefault_;
+    std::optional<std::string> value;
+    std::optional<bool> isDefault;
 };
 
 struct[[= XML::Name("enumeration")]] Enumeration {
@@ -116,8 +121,8 @@ struct[[= XML::Name("dimArrayIndex")]] DimArrayIndex {
 };
 
 struct[[= XML::Name("field")]] Field {
-    uint32_t dim;
-    uint32_t dimIncrement;
+    std::optional<uint32_t> dim;
+    std::optional<uint32_t> dimIncrement;
     std::optional<std::string> dimIndex;
     std::optional<std::string> dimName;
     std::optional<DimArrayIndex> dimArrayIndex;
@@ -128,7 +133,9 @@ struct[[= XML::Name("field")]] Field {
     // options of a field
     std::optional<std::string> description;
     // bit field described by [<msb>:<lsb>]
-    // std::variant<std::string> bitRange_;
+    std::optional<std::string> bitRange_;
+    std::optional<uint8_t> bitOffset;
+    std::optional<uint8_t> bitWidth;
     // access describes the predefined permissions for the field.
     std::optional<Access> access;
     // predefined description of write side effects
@@ -143,7 +150,7 @@ struct[[= XML::Name("field")]] Field {
 
 struct[[= XML::Name("fields")]] Fields {
     // field derivedFrom=<identifierType>
-    [[= XML::Array]] std::vector<Field> field;
+    [[= XML::Elem]] std::vector<Field> field;
 };
 
 struct[[= XML::Name("register")]] Register {
@@ -218,6 +225,8 @@ struct[[= XML::Name("registers")]] Registers {
 };
 
 struct[[= XML::Name("peripheral")]] Peripheral {
+   [[=XML::Attr]] std::optional<std::string> derivedFrom;
+
     uint32_t dim;
     uint32_t dimIncrement;
     std::optional<std::string> dimIndex;
@@ -258,18 +267,18 @@ struct[[= XML::Name("peripheral")]] Peripheral {
     // addressBlock specifies one or more address ranges that are assigned exclusively to this peripheral.
     // derived peripherals may have no addressBlock, however none-derived peripherals are required to specify
     // at least one address block
-    [[= XML::Array]] std::vector<AddressBlock> addressBlock;
+    [[= XML::Elem]] std::vector<AddressBlock> addressBlock;
     // interrupt specifies can specify one or more interrtupts by name, description and value
     [[= XML::Array]] std::vector<Interrupt> interrupt;
     // registers section contains all registers owned by the peripheral. In case a peripheral gets derived it does
     // not have its own registers section, hence this section is optional. A unique peripheral without a
     // registers section is not allowed
     // std::optional<Registers> registers;
-    [[= XML::Elem]] std::vector<Register> registers;
+    [[= XML::Array]] std::vector<Register> registers;
 };
 
 struct[[= XML::Name("Periphe")]] Peripherals {
-    [[= XML::Array]] std::vector<Peripheral> peripheral;
+    [[= XML::Elem]] std::vector<Peripheral> peripheral;
 };
 
 struct[[= XML::Name("VendorExtens")]] VendorExtensions {
@@ -313,8 +322,8 @@ struct[[= XML::Root("device")]] Device {
     std::optional<uint32_t> resetValue;
     std::optional<uint32_t> resetMask;
     // peripherals is containing all peripherals
-    // Peripherals peripherals;
-    [[= XML::Elem("peripherals")]] std::vector<Peripheral> peripherals;
+    Peripherals peripherals;
+    // [[= XML::Array]] std::vector<Peripheral> peripherals;
     // Vendor Extensions: this section captures custom extensions. This section will be ignored by default
     std::optional<VendorExtensions> vendorExtensions;
 };

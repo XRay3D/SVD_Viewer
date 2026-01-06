@@ -3,7 +3,7 @@
 
 namespace Generated {
 
-template<CpuName> CpuName stringTo(const std::string& str) {
+template<CpuName> CpuName toEnum(const std::string& str) {
     static const std::map<std::string, CpuName> mapping = {
         {"CM0", CpuName::CM0},
         {"CM0PLUS", CpuName::CM0PLUS},
@@ -77,7 +77,7 @@ std::string toString(CpuName value) {
     }
 }
 
-template<Endian> Endian stringTo(const std::string& str) {
+template<Endian> Endian toEnum(const std::string& str) {
     static const std::map<std::string, Endian> mapping = {
         {"little", Endian::little},
         {"big", Endian::big},
@@ -100,7 +100,7 @@ std::string toString(Endian value) {
     }
 }
 
-template<DataType> DataType stringTo(const std::string& str) {
+template<DataType> DataType toEnum(const std::string& str) {
     static const std::map<std::string, DataType> mapping = {
         {"uint8_t", DataType::uint8_t},
         {"uint16_t", DataType::uint16_t},
@@ -155,7 +155,7 @@ std::string toString(DataType value) {
     }
 }
 
-template<Access> Access stringTo(const std::string& str) {
+template<Access> Access toEnum(const std::string& str) {
     static const std::map<std::string, Access> mapping = {
         {"read_only", Access::read_only},
         {"write_only", Access::write_only},
@@ -184,7 +184,7 @@ std::string toString(Access value) {
     }
 }
 
-template<ModifiedWriteValues> ModifiedWriteValues stringTo(const std::string& str) {
+template<ModifiedWriteValues> ModifiedWriteValues toEnum(const std::string& str) {
     static const std::map<std::string, ModifiedWriteValues> mapping = {
         {"oneToClear", ModifiedWriteValues::oneToClear},
         {"oneToSet", ModifiedWriteValues::oneToSet},
@@ -217,7 +217,7 @@ std::string toString(ModifiedWriteValues value) {
     }
 }
 
-template<ReadAction> ReadAction stringTo(const std::string& str) {
+template<ReadAction> ReadAction toEnum(const std::string& str) {
     static const std::map<std::string, ReadAction> mapping = {
         {"clear", ReadAction::clear},
         {"set", ReadAction::set},
@@ -240,7 +240,7 @@ std::string toString(ReadAction value) {
     }
 }
 
-template<EnumUsage> EnumUsage stringTo(const std::string& str) {
+template<EnumUsage> EnumUsage toEnum(const std::string& str) {
     static const std::map<std::string, EnumUsage> mapping = {
         {"read", EnumUsage::read},
         {"write", EnumUsage::write},

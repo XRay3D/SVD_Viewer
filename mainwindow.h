@@ -1,18 +1,11 @@
 #pragma once
 
 #include "peripherals.h"
-
 #include <QMainWindow>
-
-QT_BEGIN_NAMESPACE
-
-class CppHighlighter;
-class Communicator;
 
 namespace Ui {
 class MainWindow;
 }
-QT_END_NAMESPACE
 
 class MainWindow final : public QMainWindow {
     Q_OBJECT
@@ -23,9 +16,9 @@ public:
 
 private:
     Ui::MainWindow* ui;
-    CppHighlighter* cppHighlighter;
-    Communicator* communicator_;
-
+    class CppHighlighter* cppHighlighter;
+    class Communicator* communicator_;
+    class ProxyModel* proxyModel;
     Peripherals peripherals;
 
     void loadSettings();
